@@ -10,10 +10,70 @@
 <p><h2><li>ascii</li></h2></p>(American Standard Code for Information Interchange): <i> È uno dei sistemi di codifica più semplici
   e tradizionali, che utilizza 7 bit per rappresentare 128 caratteri, tra cui lettere dell'alfabeto inglese,
   numeri e simboli di punteggiatura. Ad esempio, la lettera 'A' è codificata come 65 in ASCII </i> 
-<p><h2><li>UTF-8:</li></h2><p/> <i> È una codifica variabile, che usa da 1 a 4 byte per rappresentare i caratteri. È compatibile con ASCII
-per i caratteri comuni, ma permette anche di rappresentare caratteri di altre lingue, come simboli non latini (cinese, arabo, ecc.).
-È molto utilizzata per pagine web e applicazioni moderne.</i>
-  <p><h2><li>UTF-16:</li></h2></p>
+<p><h2><li>UTF-8:</li></h2><p/> <i>UTF-8 (Unicode Transformation Format - 8 bit) è una codifica di caratteri che rappresenta ogni carattere come una sequenza di uno o più byte. È una delle codifiche più comuni nel web e nella gestione di testi, in quanto supporta tutti i caratteri Unicode, che includono simboli, lettere, segni di punteggiatura e caratteri di molte lingue del mondo.
+
+Differenza tra ASCII e UTF-8
+ASCII usa 7 bit per rappresentare fino a 128 caratteri.
+UTF-8 è una codifica variabile che può usare da 1 a 4 byte per rappresentare un carattere. Questo permette di includere tutti i caratteri Unicode (oltre 1 milione di caratteri), come simboli matematici, lettere accentate, emoji, ideogrammi cinesi, e altro.
+Esempio di caratteri in UTF-8:
+Caratteri ASCII
+Il carattere "A" in ASCII e UTF-8 è rappresentato da 65 in decimale (o 41 in esadecimale).
+Caratteri non-ASCII
+Il carattere "é" (lettera e accentata) ha un codice Unicode che può essere rappresentato in UTF-8 come 0xC3 0xA9 (due byte).
+:
+
+∑ (Sigma) - Unicode: U+2211, in UTF-8: 0xE2 0x88 0x91
+∞ (Infinito) - Unicode: U+221E, in UTF-8: 0xE2 0x88 0x9E
+Emoticon e Emoji:
+
+ (Faccina sorridente) - Unicode: U+1F604, in UTF-8: 0xF0 0x9F 0x98 0x84
+Caratteri asiatici:
+
+"
+
+In UTF-8, questa stringa sarebbe rappresentata come una sequenza di byte, dove i caratteri ASCII (come "C", "i", "a", ecc.) sono rappresentati con un singolo byte, mentre l'emoji "😊" viene rappresentata con 4 byte.
+
+Conclusione
+UTF-8 è una codifica versatile e potente che rende possibile rappresentare tutti i caratteri del sistema Unicode, da quelli comuni come lettere e numeri, fino ai simboli e emoji più complessi. È diventata lo standard preferito su Internet, per la sua compatibilità e la capacità di supportare tutte le lingue del mondo.
+
+
+  
+  Se desideri vedere esempi di caratteri specifici in UTF-8 o hai domande, fammi sapere!.</i>
+  <p><h2><li>UTF-16:</li></h2></p>UTF-16 (Unicode Transformation Format - 16 bit) è una codifica di caratteri che rappresenta i caratteri Unicode utilizzando uno o due "unità di codice" da 16 bit ciascuna. A differenza di UTF-8, che è una codifica variabile che utilizza da 1 a 4 byte per carattere, UTF-16 usa 2 byte (16 bit) per rappresentare la maggior parte dei caratteri. Per alcuni caratteri più rari (che fanno parte di un intervallo chiamato "Supplementary Planes"), UTF-16 usa una sequenza di due unità di codice, per un totale di 4 byte.
+
+Caratteristiche principali di UTF-16:
+Caratteri comuni:
+I primi 65.536 caratteri (U+0000 a U+FFFF) sono rappresentati usando una sola unità di codice (2 byte). Questi includono la maggior parte dei caratteri usati nelle lingue moderne, simboli, lettere accentate, ecc.
+Caratteri supplementari:
+I caratteri che si trovano oltre U+FFFF (come alcuni caratteri asiatici, emoji e simboli matematici) sono rappresentati usando due unità di codice (quindi 4 byte). Questi caratteri si trovano nelle "Supplementary Planes" (Piani supplementari) e vengono codificati usando un meccanismo chiamato Surrogate Pairs.
+Confronto con UTF-8:
+UTF-8 usa da 1 a 4 byte per carattere.
+UTF-16 usa da 2 a 4 byte per carattere.
+In generale, UTF-16 è più efficiente di UTF-8 quando si lavora con lingue che usano una vasta gamma di caratteri Unicode, come le lingue asiatiche, poiché molti di questi caratteri possono essere rappresentati con soli 2 byte (rispetto ai 3-4 byte in UTF-8).
+
+Esempi di codifica in UTF-16:
+Caratteri ASCII (che si trovano nell'intervallo U+0000 a U+007F):
+
+
+
+Carattere "𝄞" (U+1D11E, simbolo musicale) in UTF-16 è rappresentato come due unità di codice: 0xD834 0xDD1E.
+Vantaggi di UTF-16:
+Efficienza per lingue asiatiche: Per le lingue come cinese, giapponese, e coreano, UTF-16 è generalmente più efficiente rispetto a UTF-8, poiché molti dei caratteri di queste lingue sono mappati su una singola unità di codice da 16 bit.
+Compatibilità con Unicode: UTF-16 può rappresentare qualsiasi carattere Unicode in modo uniforme.
+Esempi di rappresentazione di testo in UTF-16:
+Stringa "Ciao" in UTF-16:
+
+"C" (U+0043) → 0x0043
+"i" (U+0069) → 0x0069
+"a" (U+0061) → 0x0061
+"o" (U+006F) → 0x006F
+Codifica complessiva in UTF-16:
+0x0043 0x0069 0x0061 0x006F
+
+
+Se hai altre domande su UTF-16 o desideri ulteriori esempi, fammi sapere!
+
+
   
   
 
