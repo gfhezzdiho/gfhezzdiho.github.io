@@ -1,47 +1,19 @@
-<h1>CSS ZENGARDEN</h1>
-<h2>Una sfida a colpi di colori</h2>
-<p>Solo i veri sigma saranno in grado di rendere questa pagina bellissima</p>
-<h3>John von Neumann</h3>
-<p>È generalmente considerato come uno dei più grandi matematici della storia moderna e una delle personalità scientifiche preminenti del XX secolo.
-A lui si devono contributi fondamentali in numerosi campi della conoscenza come la <span class="grassetto">teoria degli insiemi</span>, fisica quantistica</span>, 
-economia, informatica, teoria dei giochi, fluidodinamica e in molti altri settori della matematica.</p>
-<span class="grassetto">analisi funzionale</span>,
-<span class="ingrassetto">
- <span class="corsivo">
-
-h1 {
-  border: 5px solid red;
-}
-
-h2 {
-  border: 4px dotted blue;
-}
-
-div {
-  border: double;
-}
 
 
+<h1>CSS ZENGARDEN</h1> <h2>Una sfida a colpi di colori</h2> <p>Solo i veri sigma saranno in grado di rendere 
+questa pagina bellissima</p> <h3>John von Neumann</h3> <p>È generalmente considerato come uno dei più grandi matematici 
+della storia moderna e una delle personalità scientifiche preminenti del XX secolo. A lui si devono contributi fondamentali in numerosi 
+campi della conoscenza come la <style> h1 { border: 5px solid red; } </style> <h1> <span class="grassetto">teoria degli insiemi</span>, 
+</h1> <span class="grassetto">analisi funzionale</span>, <span class="corsivo">topologia</span>, <span class="corsivo">fisica quantistica</span>, 
+economia, informatica, teoria dei giochi, 
+fluidodinamica e in molti altri settori della matematica.</p>
 
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-body {
-  background-color: coral;
-}
-</style>
-</head>
-<body>
-
+body {background-color: coral;}
 <h1>The background-color Property</h1>
 
-<p>The background color can be specified with a color name.</p>
+<p>light-blue.</p>
 
 </body>
-</html>
-
-
 
 
 
