@@ -1,44 +1,37 @@
-<div class="quadro">
-    <div id="uno" class="cubo"></div>
-    <div id="due" class="cubo nero"></div>
-    <div id="tre" class="cubo"></div>
-    
-    <div id="quattro" class="cubo"></div>
-    <div id="cinque" class="cubo"></div>
-    <div id="sei" class="cubo nero"></div>
-    
-    <div id="sette" class="cubo nero"></div>
-    <div id="otto" class="cubo nero"></div>
-    <div id="nove" class="cubo nero"></div>
-</div>
 
 <style>
-   .quadro {
-        
-        border: 12px;
-        border-color:black;
-        border-style:solid ;
-        width: 250px;
-    }
-.cubo{
-    background-color: white;
-    border: 12px;
-        border-color:white;
-        border-style:solid ;
-        width: 50px;
-       
+.quadro {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    position: absolute;
+    top: 5%;
+    left:15%;
+    transform: translateX(-50%);
 }
-.nero{
-    border-color:black;
-    background-color: black;
-     width: 235px;
-}
-}
-.cubonero{
-    border-color:black;
-    background-color: black;
-     width: 235px;
-     
 
+.cubo {
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    border: 1px solid black;
+}
+
+.cubo.nero {
+    background-color: black;
 }
 </style>
+
+<div class="quadro">
+    <div class="cubo"></div>
+    <div class="cubo nero"></div>
+    <div class="cubo"></div>
+
+    <div class="cubo"></div>
+    <div class="cubo"></div>
+    <div class="cubo nero"></div>
+
+    <div class="cubo nero"></div>
+    <div class="cubo nero"></div>
+    <div class="cubo nero"></div>
+</div>
