@@ -1,34 +1,85 @@
 
-    <div id="ghezzi">
-       <h1>indice</h1>  
-        <li> <a href="indice.html"> vai alla pagina indice </a> </li>
-        <li> <a href="copertina.html"> vai alla copertina </a> </li>
-        <li> <a href="capitolo1.html"> vai al capitolo1 <a/> </li>
-        <li> <a href="capitolo2.html"> vai al capitolo2 <a/> </li>
-        <li> <a href="capitolo3.html"> vai al capitolo3 <a/> </li>  
-    </div>
-    <style>
-      #ghezzi {
-    padding-left: 5px;
-    border-left-color:black ;
-    border-left-style: groove;
-    border-left-width: 10px;
+  <style>
     
-    border-right-color:aqua ;
-    border-right-style:groove ;
-    border-right-width:5px ;
+    body {
+      background-color: black; 
+      color: white; 
+      font-family: Arial, sans-serif; 
+      margin: 0;
+      padding: 0;
+    }
+
     
+    #ghezzi {
+      max-width: 400px; 
+      margin: 20px auto; 
+      padding: 20px;
+      background-color: #1d1d1d; 
+      border-radius: 10px; 
+      border: 2px solid #2ecc71; 
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5); 
+    }
+
     
-    border-bottom: aqua;
-    border-bottom-style:groove ;
-    border-bottom-width: 10px;
+    #ghezzi h1 {
+      text-align: center;
+      color: #2ecc71; 
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+   
+    #ghezzi ul {
+      list-style-type: none; 
+      padding: 0;
+    }
+
+    #ghezzi li {
+      font-size: 18px; 
+      margin-bottom: 10px; 
+    }
+
     
-    border-top-color:black ;
-    border-top-style:groove ;
-    border-top-width:10px ;
+    #ghezzi a {
+      color: #2ecc71; 
+      text-decoration: none; 
+      display: block; 
+      padding: 10px;
+      border-radius: 5px; 
+      transition: background-color 0.3s, color 0.3s;
+      font-size: 30px; 
+    }
+
     
-    margin-top:15px;
-    padding-top: 5px;
-        }
-    </style>
-    
+    #ghezzi a:hover {
+      background-color: #16a085; 
+      color: white; 
+
+   
+    #ghezzi a {
+      opacity: 0;
+      animation: fadeIn 0.8s forwards;
+    }
+
+   
+  
+  </style>
+</head>
+<body>
+
+ 
+  <div id="ghezzi">
+    <h1>Indice</h1>
+    <ul>
+     
+      <li><a href="copertina.html">Vai alla copertina</a></li>
+      <li><a href="capitolo1.html">Vai al capitolo 1</a></li>
+      <li><a href="capitolo2.html">Vai al capitolo 2</a></li>
+      <li><a href="capitolo3.html">Vai al capitolo 3</a></li>
+      <li><a href="capitolo4.html">Vai al capitolo 4</a></li>
+      <li><a href="capitolo5.html">Vai al capitolo 5</a></li>
+    </ul>
+  </div>
+
+</body>
+</html>

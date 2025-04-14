@@ -1,40 +1,234 @@
-<h2><b>
-      <li>codifiche
-  </b></h2>
+
+<
+    <title>Codifiche</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2,
+        h3 {
+            color: #00b140;
+        }
+
+        h2 {
+            border-bottom: 2px solid #00b140;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        a {
+            color: #00e676;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #00b140;
+        }
+
+        div {
+            border: 2px solid #00b140;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            background-color: #1a1a1a;
+        }
+
+        ol,
+        ul {
+            margin-left: 20px;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            border: 1px solid #00b140;
+        }
+
+        td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #00b140;
+            background-color: #1a1a1a;
+        }
+
+        td:nth-child(odd) {
+            background-color: #262626;
+        }
+
+        td:nth-child(even) {
+            background-color: #333333;
+        }
+
+        th {
+            background-color: #00b140;
+            color: white;
+            padding: 10px;
+        }
+
+        .highlight {
+            background-color: #4caf50;
+            color: white;
+            font-weight: bold;
+        }
+
+        .code-box {
+            background-color: #333333;
+            color: #00e676;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+            margin: 10px 0;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 20px 0;
+            background-color: #00b140;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #00e676;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2><b>Codifiche</b></h2>
     <ol>
-     <li><a href="#ascii">ascii </a>        
-    <li><a href="#immagini">immagini</a>        
-    <li><a href="#audio">audio </a>
-    <li><a href="#numeri">numeri </a>   
-  </ol>
+        <li><a href="#ascii">ASCII</a></li>
+        <li><a href="#immagini">Immagini</a></li>
+        <li><a href="#audio">Audio</a></li>
+        <li><a href="#numeri">Numeri</a></li>
+    </ol>
 
+    <div id="ascii">
+        <h2>ASCII</h2>
+        <p><i>È uno dei sistemi di codifica più semplici e tradizionali, che utilizza 7 bit per rappresentare 128 caratteri, tra cui lettere dell'alfabeto inglese, numeri e simboli di punteggiatura. Ad esempio, la lettera 'A' è codificata come 65 in ASCII.</i></p>
+        <p>In ASCII (American Standard Code for Information Interchange), ogni carattere (lettera, numero, simbolo, spazio, ecc.) è rappresentato da un valore numerico. La tastiera di un computer include una varietà di caratteri, ognuno dei quali corrisponde a un valore ASCII.</p>
+        <p>ASCII, acronimo di American Standard Code for Information Interchange, è un sistema di codifica a 7 bit utilizzato per rappresentare caratteri nei computer e nelle comunicazioni elettroniche. Questo codice associa a ogni carattere un valore numerico compreso tra 0 e 127.</p>
+        <p>I primi 32 valori, da 0 a 31, sono riservati ai caratteri di controllo, mentre i valori da 32 a 126 rappresentano caratteri stampabili, come lettere, numeri e simboli.</p>
+        <h3>Dettagli sull'uso di ASCII:</h3>
+        <p>ASCII viene usato principalmente per la codifica di testo in ambienti informatici. Ogni dispositivo elettronico, dalla tastiera del computer a un server web, deve essere in grado di interpretare e rappresentare il testo in formato binario, che è esattamente ciò che fa ASCII. Inoltre, esistono vari tipi di estensioni come l'ASCII esteso, che utilizza 8 bit invece di 7 per includere 128 caratteri extra, come lettere accentate e simboli speciali.</p>
+    </div>
 
+    <div id="audio">
+        <h2>Audio</h2>
+        <p>L'audio si riferisce fondamentalmente alla rappresentazione e al trattamento digitale dei suoni percepiti dall'orecchio umano. In ambito tecnologico, l'audio può essere registrato, trasmesso, manipolato e riprodotto attraverso dispositivi elettronici come computer, smartphone e sistemi audio.</p>
+        <p>Le principali caratteristiche tecniche dell'audio sono:</p>
+        <ul>
+            <li><strong>Frequenza:</strong> La frequenza, misurata in Hertz (Hz), determina l'altezza del suono. Suoni con frequenze più alte sono percepiti come toni acuti, mentre frequenze più basse come toni gravi.</li>
+            <li><strong>Intensità:</strong> L'intensità del suono, comunemente riferita come volume, indica la forza o l'ampiezza delle vibrazioni sonore.</li>
+        </ul>
+        <h3>Dettagli aggiuntivi sull'audio digitale:</h3>
+        <p>L'audio digitale è rappresentato come una serie di valori numerici che rappresentano l'intensità del suono in momenti specifici. Questi valori vengono generati durante la digitalizzazione, un processo che campiona l'onda sonora analogica a intervalli regolari. La qualità dell'audio digitale dipende dalla frequenza di campionamento (il numero di campioni per secondo) e dalla profondità di bit (il numero di bit utilizzati per rappresentare ogni campione). Maggiore è la frequenza di campionamento e la profondità di bit, migliore sarà la qualità del suono, ma anche maggiore sarà la quantità di dati necessaria per memorizzarlo.</p>
+    </div>
 
+    <div id="immagini">
+        <h2>Immagini</h2>
+        <p>Un'immagine digitale è una rappresentazione visiva di oggetti, scene, persone o concetti, composta da una matrice di pixel organizzata in righe e colonne. Ogni pixel ha un valore numerico che rappresenta una combinazione di colori o livelli di intensità, formando così l'immagine visiva.</p>
+        <p>Le immagini digitali possono essere create, archiviate e manipolate attraverso la tecnologia moderna, consentendo la visualizzazione e la condivisione istantanea di contenuti visivi in formati digitali. Esistono diversi tipi di immagini digitali, come le immagini bitmap, vettoriali e a scala di grigi, ciascuna con le proprie caratteristiche e applicazioni.</p>
+        <p><b>TECNICA VETTORIALE!</b><br>La tecnica vettoriale ha la caratteristica che quando l'immagine viene zoomata non si sgrana. Questa tecnica viene utilizzata nelle aziende per creare loghi, poiché il logo è un simbolo molto importante per un'azienda, poiché rappresenta il suo valore.</p>
+        <p><b>BIT MAP</b><br>Una bitmap è un tipo di immagine digitale costituita da una matrice di pixel, dove ogni pixel rappresenta un punto dell'immagine. Le immagini bitmap sono ideali per rappresentare immagini dettagliate, come fotografie o grafiche complesse, ma i file risultano spesso di grandi dimensioni, soprattutto per immagini ad alta risoluzione. Inoltre, non sono facilmente scalabili: ingrandendo un'immagine bitmap si perde la qualità, con l'immagine che può diventare sfocata o pixelata.</p>
+        <h3>Codifica dell'immagine e compressione:</h3>
+        <p>Un altro aspetto importante delle immagini digitali è la compressione. La compressione di un'immagine consente di ridurre lo spazio di memoria richiesto per immagazzinarla, mantenendo però la qualità visiva. Esistono due principali tipi di compressione: compressione "lossy" (perdita di qualità, come nel formato JPEG) e compressione "lossless" (senza perdita di qualità, come nei formati PNG e GIF).</p>
+    </div>
 
+    <div>
+        <h3>Occupazione memoria di un'immagine!</h3>
+        <p>Per determinare l'occupazione di memoria di un'immagine, bisogna calcolare la quantità di memoria necessaria per memorizzare tutti i dati che compongono l'immagine stessa. Questo dipende da vari fattori, tra cui la risoluzione dell'immagine, la profondità di colore (bit per pixel) e il formato dell'immagine.</p>
+        <p><b>Esempio:</b> Risoluzione 580x640 a tonalità di grigio (8bit) in MB</p>
+        <div class="code-box">
+            <p>occupazione1 = 580 x 640 x 8</p>
+            <p>occupazione2 = occupazione1 ÷ 8 = byte</p>
+            <p>occupazione3 = occupazione2 ÷ 2^10 = kb</p>
+            <p>occupazione4 = occupazione3 ÷ 2^10 = Mb</p>
+        </div>
+    </div>
 
+    <div>
+        <h2>Codifica di Immagini</h2>
+        <table>
+            <tr>
+                <th>Bit</th>
+                <th>Descrizione</th>
+                <th>Tipi di utilizzo</th>
+            </tr>
+            <tr>
+                <td>1 bit</td>
+                <td>Bianco e nero</td>
+                <td>Icone, loghi in bianco e nero</td>
+            </tr>
+            <tr>
+                <td>8 bit</td>
+                <td>Tonalità di grigio</td>
+                <td>Immagini in bianco e nero dettagliate</td>
+            </tr>
+            <tr>
+                <td>16 bit</td>
+                <td>Radiografie</td>
+                <td>Immagini mediche ad alta definizione</td>
+            </tr>
+            <tr>
+                <td>24 bit</td>
+                <td>Colori</td>
+                <td>Immagini a colori di alta qualità, fotografie</td>
+            </tr>
+            <tr>
+                <td>48 bit</td>
+                <td>Colori avanzati</td>
+                <td>Immagini professionali, scansioni ad alta risoluzione</td>
+            </tr>
+        </table>
+    </div>
 
+    <div id="numeri">
+        <h2>Numeri</h2>
+        <h3>Numeri Interi e Reali</h3>
+        <p>I numeri interi in informatica sono numeri senza parte frazionaria e possono essere rappresentati come numeri positivi o negativi, incluso lo zero. Esempi di rappresentazione:</p>
+        <ul>
+            <li>Un intero a 8 bit in formato signed può rappresentare valori da -128 a +127.</li>
+            <li>Un intero a 16 bit può rappresentare valori da -32.768 a +32.767 (signed).</li>
+        </ul>
+        <p>In un computer, i numeri interi vengono rappresentati utilizzando il sistema binario. I numeri reali includono numeri frazionari (decimali) e possono essere rappresentati in vari formati.</p>
+        <p><b>In sintesi:</b></p>
+        <ul>
+            <li>Interi: rappresentano valori senza decimali, e la loro codifica è semplice, ma limitata dalla dimensione in bit.</li>
+            <li>Reali: includono numeri con decimali e sono rappresentati in modo più complesso (floating point), per gestire valori più grandi e con maggiore precisione.</li>
+        </ul>
+    </div>
 
-  <div>
-    <h2>ascii</h2>(American Standard Code for Information Interchange): <i> È uno dei sistemi di codifica più semplici
-      e tradizionali, che utilizza 7 bit per rappresentare 128 caratteri, tra cui lettere dell'alfabeto inglese,
-      numeri e simboli di punteggiatura. Ad esempio, la lettera 'A' è codificata come 65 in ASCII </i>
+    <a href="indice.html" class="button">Vai alla pagina indice</a>
 
-    In ASCII (American Standard Code for Information Interchange), ogni carattere (lettera, numero, simbolo, spazio,
-    ecc.) è rappresentato da un valore numerico. La tastiera di un computer include una varietà di caratteri, ognuno dei
-    quali corrisponde a un valore ASCII.
+</body>
 
+</html>
 
-
-
-
-    ASCII, acronimo di American Standard Code for Information Interchange, è un sistema di
-    codifica a 7 bit utilizzato per rappresentare caratteri nei computer e nelle comunicazioni elettroniche.
-    Questo codice associa a ogni carattere un valore numerico compreso tra 0 e 127.
-
-    I primi 32 valori, da 0 a 31, sono riservati ai caratteri di controllo, mentre i valori da 32 a 126
-    rappresentano caratteri stampabili, come lettere, numeri e simboli. 
-    <br>
-
+<div id="ghezzi">
+   
+    <ul>
+     
+      <li><a href="copertina.html">Vai alla copertina</a></li>
+      <li><a href="capitolo1.html">Vai al capitolo 1</a></li>
+      <li><a href="capitolo2.html">Vai al capitolo 2</a></li>
+     
+      <li><a href="capitolo4.html">Vai al capitolo 4</a></li>
+      <li><a href="capitolo5.html">Vai al capitolo 5</a></li>
+    </ul>
   </div>
 
   <style>
