@@ -2,87 +2,108 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gioco di Abbinamento Pokémon</title>
+    <title>Memory Pokémon: Sfida di Lucario</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('https://wallpapercave.com/wp/wp2754148.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            color: #fff;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+            margin-bottom: 30px;
+            font-size: 3em;
         }
 
         .game-container {
             display: grid;
-            grid-template-columns: repeat(4, 150px);
-            grid-template-rows: repeat(4, 150px);
-            gap: 10px;
-            justify-items: center;
+            grid-template-columns: repeat(4, 120px);
+            grid-template-rows: repeat(4, 120px);
+            gap: 15px;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
         }
 
         .card {
-            width: 150px;
-            height: 150px;
-            background-color: #bdbdbd;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            width: 120px;
+            height: 120px;
+            perspective: 1000px;
             cursor: pointer;
-            transition: transform 0.3s ease;
         }
 
-        .card img {
-            display: none;
+        .card-inner {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            border-radius: 10px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
         }
 
-        .card.flipped img {
-            display: block;
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
         }
 
-        .card.flipped {
+        .card-front,
+        .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            backface-visibility: hidden;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card-front {
             background-color: #fff;
-            transform: scale(1.1);
+            transform: rotateY(180deg);
         }
 
-        .card.matched {
-            background-color: #4caf50;
-            box-shadow: 0 4px 15px rgba(0, 128, 0, 0.5);
+        .card-back {
+            background-image: url('https://images.alphacoders.com/133/1331215.png');
+            background-color: #333;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .matched .card-inner {
+            cursor: default;
+            box-shadow: 0 0 20px 5px #4caf50;
         }
 
         .message {
-            font-size: 24px;
-            font-weight: bold;
-            text-align: center;
             margin-top: 20px;
+            font-size: 1.5em;
+            color: #fff;
+            font-weight: bold;
+            text-shadow: 1px 1px 4px #000;
         }
     </style>
 </head>
 <body>
 
-    <div class="game-container">
-        <!-- Le carte sono generate tramite JavaScript -->
-    </div>
-
+    <h1>Memory Pokémon: Sfida di Lucario</h1>
+    <div class="game-container"></div>
     <div class="message"></div>
 
     <script>
-        const pokemons = [
-            "pikachu", "bulbasaur", "charmander", "squirtle",
-            "pikachu", "bulbasaur", "charmander", "squirtle",
-            "eevee", "jigglypuff", "meowth", "psyduck",
-            "eevee", "jigglypuff", "meowth", "psyduck"
+        const pokemonImages = [
+            "1", "4", "7", "25", "39", "52", "133", "143"
         ];
+        const cards = [...pokemonImages, ...pokemonImages]; // 16 carte, 8 coppie
 
-        // Mescola le immagini dei Pokémon
+        // Mescola le carte
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -90,61 +111,61 @@
             }
         }
 
-        shuffle(pokemons);
+        shuffle(cards);
 
-        // Crea le carte dinamicamente
-        const gameContainer = document.querySelector('.game-container');
+        const container = document.querySelector('.game-container');
+        const message = document.querySelector('.message');
         let flippedCards = [];
-        let matchedCards = 0;
+        let matchedPairs = 0;
 
-        pokemons.forEach((pokemon, index) => {
+        cards.forEach(id => {
             const card = document.createElement('div');
             card.classList.add('card');
-            card.dataset.pokemon = pokemon;
 
-            const img = document.createElement('img');
-            img.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`;
-            card.appendChild(img);
+            const cardInner = document.createElement('div');
+            cardInner.classList.add('card-inner');
 
-            card.addEventListener('click', () => flipCard(card));
+            const front = document.createElement('div');
+            front.classList.add('card-front');
+            front.style.backgroundImage = `url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png)`;
 
-            gameContainer.appendChild(card);
-        });
+            const back = document.createElement('div');
+            back.classList.add('card-back');
 
-        function flipCard(card) {
-            if (card.classList.contains('flipped') || flippedCards.length === 2) {
-                return;
-            }
+            cardInner.appendChild(front);
+            cardInner.appendChild(back);
+            card.appendChild(cardInner);
 
-            card.classList.add('flipped');
-            flippedCards.push(card);
+            card.addEventListener('click', () => {
+                if (card.classList.contains('flipped') || flippedCards.length === 2) return;
 
-            if (flippedCards.length === 2) {
-                checkForMatch();
-            }
-        }
+                card.classList.add('flipped');
+                flippedCards.push({ element: card, id });
 
-        function checkForMatch() {
-            const [firstCard, secondCard] = flippedCards;
-
-            if (firstCard.dataset.pokemon === secondCard.dataset.pokemon) {
-                firstCard.classList.add('matched');
-                secondCard.classList.add('matched');
-                matchedCards += 2;
-                flippedCards = [];
-
-                if (matchedCards === pokemons.length) {
-                    document.querySelector('.message').textContent = "Hai vinto! Hai abbinato tutte le carte!";
+                if (flippedCards.length === 2) {
+                    const [first, second] = flippedCards;
+                    if (first.id === second.id) {
+                        first.element.classList.add('matched');
+                        second.element.classList.add('matched');
+                        matchedPairs++;
+                        if (matchedPairs === 8) {
+                            message.textContent = "🎉 Hai vinto! Tutti i Pokémon sono stati abbinati!";
+                        }
+                        flippedCards = [];
+                    } else {
+                        setTimeout(() => {
+                            first.element.classList.remove('flipped');
+                            second.element.classList.remove('flipped');
+                            flippedCards = [];
+                        }, 1000);
+                    }
                 }
-            } else {
-                setTimeout(() => {
-                    firstCard.classList.remove('flipped');
-                    secondCard.classList.remove('flipped');
-                    flippedCards = [];
-                }, 1000);
-            }
-        }
-    </script>
+            });
 
+            container.appendChild(card);
+        });
+    </script>
 </body>
 </html>
+
+

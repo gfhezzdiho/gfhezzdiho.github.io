@@ -1,261 +1,464 @@
-<h3>Cos'è l'Informatica</h3>
-<style>
-  body {
-    background-color: black;
-    color: white;
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
-  }
 
-
-  #ghezzi {
-    max-width: 1200px;
-    margin: 30px auto;
-    padding: 20px;
-    background-color: #1d1d1d;
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-  }
-
-
-  h1,
-  h2 {
-    color: #2ecc71;
-    font-weight: bold;
-    text-align: center;
-    font-size: 2rem;
-  }
-
-  p {
-    font-size: 1.1rem;
-    text-align: justify;
-    margin-bottom: 20px;
-  }
-
-
-  ol {
-    margin-left: 40px;
-  }
-
-
-  div {
-    border: 4px solid #2ecc71;
-    width: auto;
-    padding: 20px;
-    margin-bottom: 30px;
-    border-radius: 8px;
-  }
-
- 
- 
-  a {
-    display: block;
-    text-align: center;
-    color: #2ecc71;
-    margin-top: 40px;
-    font-size: 1rem;
-    text-decoration: none;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
-
-  .imghw {
-    padding: 0;
-    text-align: center;    
-    width :5000px;
-    height: auto;
-  }
-
-  .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-</style>
+    <title>Capitolo 2: Componenti del Computer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #f0f0f0;
+            line-height: 1.8;
+        }
+        h1, h2 {
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+            margin: 30px 0;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+        h1 {
+            font-size: 3.5em;
+            letter-spacing: 2px;
+        }
+        h2 {
+            color: #4caf50;
+            font-size: 2.5em;
+        }
+        p {
+            font-size: 1.2em;
+            color: #dcdcdc;
+            margin-bottom: 20px;
+        }
+        .content {
+            padding: 40px 50px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .section {
+            margin-bottom: 50px;
+        }
+        .note, .example {
+            background-color: #333;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            margin-top: 20px;
+        }
+        .index {
+            position: fixed;
+            top: 20%;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        .index a {
+            color: #ffffff;
+            font-size: 1.1em;
+            display: block;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+        .index a:hover {
+            color: #4caf50;
+        }
+    </style>
 </head>
+
+    <title>Capitolo 2: Componenti del Computer</title>
+    <style>
+       
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #f0f0f0;
+            margin: 0;
+            line-height: 1.8;
+            padding: 0;
+        }
+
+        h1, h2 {
+            font-family: 'Roboto', sans-serif;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #4caf50;
+            font-size: 2.5em;
+            margin-top: 20px;
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #dcdcdc;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            padding: 40px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .note {
+            background-color: #333;
+            color: #f0f0f0;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            font-style: italic;
+            margin-top: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+        }
+
+        .example {
+            background-color: #222;
+            color: #e0e0e0;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 10px;
+            border: 1px solid #444;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content">
+        <h1>Capitolo 2: Componenti del Computer</h1>
+
+        <div class="index">
+            <h3>Indice</h3>
+            <a href="#von-neumann">1) Architettura di Von Neumann</a>
+            <a href="#hardware">2) Hardware</a>
+            <a href="#software">3) Software</a>
+        </div>
+
+        <div id="von-neumann" class="section">
+            <h2>1) Architettura di Von Neumann</h2>
+            <p>L'architettura di Von Neumann, proposta da John Von Neumann negli anni '40, è il modello di base su cui si basano la maggior parte dei computer moderni. In questo schema, i dati e le istruzioni vengono immagazzinati nella stessa memoria, il che consente di eseguire programmi che possono essere modificati. L'idea centrale di questo modello è la presenza di una memoria comune per le istruzioni del programma e i dati, a differenza di modelli precedenti che prevedevano memorie separate per i due tipi di informazioni. Questo approccio ha reso più facile la progettazione di computer programmabili e la creazione di software più complessi.</p>
+
+            <p>La struttura dell'architettura di Von Neumann si compone di cinque componenti principali, ognuna delle quali svolge un ruolo cruciale nel funzionamento del computer. Questi sono:</p>
+            <ul>
+                <li><strong>Unità di controllo:</strong> Questa componente è incaricata di interpretare le istruzioni memorizzate in memoria e di coordinarne l'esecuzione. Gestisce i flussi di dati tra le altre unità, come l'ALU e la memoria, e assicura che il processore esegua correttamente ogni operazione.</li>
+                <li><strong>Unità Aritmetica e Logica (ALU):</strong> L'ALU è responsabile dell'esecuzione delle operazioni matematiche e logiche, come somma, sottrazione, moltiplicazione, divisione, e confronti logici. Essa manipola i dati in base alle istruzioni ricevute dalla CPU.</li>
+                <li><strong>Memoria:</strong> La memoria è un elemento centrale nell'architettura di Von Neumann. Essa è utilizzata per immagazzinare sia i dati che le istruzioni. Le informazioni in memoria sono organizzate in indirizzi e possono essere recuperate dalla CPU in base alle necessità del programma in esecuzione.</li>
+                <li><strong>Dispositivi di Input/Output:</strong> Questi dispositivi permettono al computer di comunicare con l'esterno, ricevendo dati in ingresso (come dalla tastiera o dal mouse) e fornendo risultati in uscita (come a un monitor o a una stampante).</li>
+                <li><strong>Bus:</strong> Il bus è un canale di comunicazione che consente il trasferimento di dati e istruzioni tra la memoria, la CPU e i dispositivi di I/O. Il bus è fondamentale per il funzionamento del computer, poiché collega tutti gli altri componenti e consente loro di interagire.</li>
+            </ul>
+            <div class="note">
+                <strong>Nota:</strong> Sebbene l'architettura di Von Neumann abbia avuto un impatto significativo sulla progettazione dei computer, essa presenta anche dei limiti, come il "bottleneck" della memoria, che può rallentare le prestazioni del sistema in caso di elevate richieste di dati.
+            </div>
+        </div>
+
+        <div id="hardware" class="section">
+            <h2>2) Hardware</h2>
+            <p>L'hardware è l'insieme di tutti i componenti fisici di un computer. Esso comprende tutte le parti che possiamo toccare, come la tastiera, il monitor, la CPU e i dispositivi di memoria. Questi componenti lavorano insieme per eseguire i programmi e gestire i dati.</p>
+
+            <h3>a) Schede</h3>
+            <p>Le schede sono componenti essenziali del computer. La scheda madre è il circuito principale che collega e coordina tutte le altre componenti hardware. Essa ospita il processore (CPU), la memoria RAM, i dispositivi di connessione come porte USB ed Ethernet, e le schede di espansione. Le schede di espansione, come le schede video, audio e di rete, aggiungono funzionalità al sistema.</p>
+
+            <p>Oltre alla scheda madre, ci sono altre schede importanti per il corretto funzionamento del computer, tra cui:</p>
+            <ul>
+                <li><strong>Scheda video:</strong> gestisce la visualizzazione delle immagini sul monitor, decodificando i segnali grafici e producendo l'output visibile. È fondamentale per l'elaborazione grafica e i giochi.</li>
+                <li><strong>Scheda audio:</strong> consente al computer di riprodurre e registrare suoni, processando i segnali audio in entrata e in uscita.</li>
+                <li><strong>Scheda di rete:</strong> consente al computer di connettersi a una rete, sia tramite cavo (Ethernet) che wireless (Wi-Fi), per accedere a Internet o ad altri dispositivi in rete.</li>
+            </ul>
+
+            <h3>b) Cavi</h3>
+            <p>I cavi sono utilizzati per trasmettere dati e alimentazione tra i vari componenti hardware del computer. I cavi di alimentazione forniscono energia alla CPU, alla scheda madre e ad altri dispositivi, mentre i cavi dati, come i cavi USB, SATA e HDMI, permettono il trasferimento di informazioni tra dispositivi.</p>
+
+            <h3>c) Periferiche</h3>
+            <p>Le periferiche sono dispositivi esterni che si collegano al computer per migliorare o ampliare le sue capacità. Le periferiche di input, come la tastiera, il mouse e il microfono, permettono agli utenti di interagire con il computer, inviando comandi e dati. Le periferiche di output, come il monitor, la stampante e gli altoparlanti, forniscono feedback visivo, sonoro e stampato. Alcuni dispositivi, come i touchscreen e i modem, funzionano sia come dispositivi di input che di output, consentendo una comunicazione bidirezionale.</p>
+        </div>
+
+        <div id="software" class="section">
+            <h2>3) Software</h2>
+            <p>Il software è l'insieme di programmi, istruzioni e applicazioni che permettono di utilizzare il computer per svolgere compiti specifici. A differenza dell'hardware, il software non è fisico, ma è rappresentato da linee di codice che istruiscono la macchina su come eseguire determinate azioni.</p>
+
+            <h3>a) Firmware</h3>
+            <p>Il firmware è un tipo di software che è "incorporato" direttamente nell'hardware. È progettato per fornire le funzioni di base necessarie per far funzionare i dispositivi. Esempi di firmware includono il BIOS (Basic Input/Output System) dei computer, che è responsabile per l'avvio del sistema operativo e per l'interazione iniziale con i dispositivi hardware. Il firmware è specifico per ciascun dispositivo e spesso non può essere modificato facilmente dall'utente, a meno che non vengano eseguite operazioni avanzate di aggiornamento o ripristino.</p>
+
+            <h3>b) Sistemi Operativi</h3>
+            <p>Il sistema operativo è un software fondamentale che gestisce l'intero sistema del computer. Eseguito direttamente sulla CPU, il sistema operativo gestisce le risorse hardware, come la memoria e il processore, e fornisce servizi essenziali per l'esecuzione dei programmi. I sistemi operativi più conosciuti sono Windows, macOS e Linux, ognuno dei quali ha caratteristiche proprie, ma tutti permettono agli utenti di interagire con il computer tramite un'interfaccia grafica o una linea di comando.</p>
+
+            <h3>c) Applicazioni</h3>
+            <p>Le applicazioni sono programmi software progettati per svolgere compiti specifici, come la scrittura di documenti, la navigazione sul web o l'elaborazione di fogli di calcolo. Le applicazioni sono eseguite all'interno del sistema operativo e possono essere installate o scaricate da Internet. Esempi comuni di applicazioni includono Microsoft Word, Google Chrome, Photoshop, e Microsoft Excel. Ogni applicazione è progettata per risolvere un determinato problema o soddisfare una necessità dell'utente, e la sua efficienza dipende dal sistema operativo e dall'hardware su cui è eseguita.</p>
+        </div>
+    </div>
+
+</body>
+</html>
 
 <body>
 
-  <div id="ghezzi">
-    <h1>Capitolo 1: Componenti del Computer</h1>
-    <div class="container">
-      <img class="imghw" src="hw.sw.jpg" alt="errore" />
-    </div>
 
+  <nav>
+      <a href="#capitolo2">Capitolo 2: </a>
+      <a href="#capitolo3">Capitolo 3: </a>
+      <a href="#capitolo4">Capitolo 4: </a>
+      <a href="#capitolo5">Capitolo 5</a>
+  </nav>
 
+  <head>
+    
+    <title>Capitoli di Informatica</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #f0f0f0;
+            margin: 0;
+            line-height: 1.8;
+            padding: 0;
+        }
 
-    <h2>Componenti del Computer</h2>
-    <ol>
-      <li><a href="#hardware">Hardware</a></li>
-      <li><a href="#software">Software</a></li>
-      <li><a href="#tipologie">Tipologie di componenti</a></li>
-    </ol>
+        h1, h2 {
+            font-family: 'Roboto', sans-serif;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 30px;
+        }
 
-    <div id="hardware">
-      <h2>Hardware</h2>
-      <p>
-        Gli hardware sono tutti i componenti fisici, concreti (cioè che si possono toccare) di un computer. Ad esempio,
-        il processore, la scheda madre, la scheda grafica, la tastiera, il mouse, il monitor e così via. Gli hardware
-        sono fondamentali per il funzionamento di ogni dispositivo tecnologico, poiché senza di essi non sarebbe
-        possibile eseguire alcuna operazione.
-      </p>
-      <p>
-        Esistono due tipi di hardware: hardware di input e hardware di output. Gli hardware di input sono dispositivi
-        che permettono di inserire dati o comandi in un computer, come la tastiera, il mouse, il microfono, il joystick,
-        ecc. Gli hardware di output sono dispositivi che ricevono dati dal computer e li presentano all'utente in vari
-        modi, come il monitor, la stampante, le cuffie, ecc. In altre parole, gli hardware di input permettono
-        all'utente di interagire con il sistema, mentre quelli di output restituiscono i risultati di queste
-        interazioni.
-      </p>
-      <p>
-        Ogni hardware ha un ruolo fondamentale nel completamento del ciclo di lavoro di un computer. La velocità, la
-        qualità e l'efficienza delle operazioni dipendono dal tipo di hardware installato nel sistema. Inoltre, la
-        compatibilità tra i diversi hardware e il software installato sul computer è essenziale per ottenere prestazioni
-        ottimali.
-      </p>
-    </div>
+        h2 {
+            color: #4caf50;
+            font-size: 2.5em;
+            margin-top: 20px;
+        }
 
-    <div>
-      <h2>Schede</h2>
-      <p class="schede">
-        Le schede sono componenti fisici o circuiti stampati che si inseriscono in un computer per aggiungere
-        funzionalità specifiche. Tra gli esempi ci sono le schede madri, che fungono da scheda principale per collegare
-        e permettere la comunicazione tra tutti i componenti del computer, le schede video responsabili del rendering
-        grafico, le schede di rete che consentono la comunicazione su una rete, e le schede audio che si occupano
-        dell'elaborazione dei segnali audio. Ogni scheda ha un ruolo unico che permette al computer di svolgere compiti
-        diversi.
-      </p>
-      <p>
-        In particolare, la scheda madre è uno degli elementi più cruciali in quanto collega tutte le altre schede,
-        incluse quelle video e audio, e permette ai dati di fluire attraverso i vari componenti. La scheda video,
-        invece, è fondamentale per la qualità delle immagini e dei video che vediamo sullo schermo, e per i giochi e
-        applicazioni grafiche avanzate. Allo stesso modo, le schede audio sono essenziali per l'elaborazione dei suoni,
-        permettendo di ascoltare musica, video, o partecipare a videoconferenze.
-      </p>
-      <p>
-        Le schede di rete, che permettono la connessione tra il computer e altre risorse come internet o reti locali,
-        sono essenziali in un mondo sempre più connesso. Le moderne schede di rete supportano velocità di trasferimento
-        dati elevate, consentendo streaming in alta definizione e la trasmissione di grandi quantità di informazioni tra
-        dispositivi. Le schede audio, sebbene meno visibili, migliorano l'esperienza multimediale, permettendo una
-        qualità del suono cristallina e l'elaborazione dei segnali in tempo reale.
-      </p>
-    </div>
+        p {
+            font-size: 1.2em;
+            color: #dcdcdc;
+            margin-bottom: 20px;
+        }
 
-    <div>
-      <h2>Cavi</h2>
-      <p>
-        I cavi sono connettori fisici utilizzati per trasmettere dati o alimentazione tra vari componenti hardware.
-        Alcuni tipi comuni includono i cavi di alimentazione, che forniscono energia ai dispositivi, e i cavi di
-        trasmissione dati, come USB, HDMI, Ethernet e cavi audio. I cavi possono anche variare per velocità di
-        trasmissione e qualità del segnale, per esempio, i cavi USB 3.0 sono più veloci rispetto ai cavi USB 2.0.
-      </p>
-      <p>
-        Oltre ai cavi fisici, esistono anche soluzioni wireless, come il Wi-Fi o il Bluetooth, che permettono la
-        trasmissione di dati senza l'uso di fili, ma l'importanza dei cavi rimane fondamentale nelle comunicazioni
-        dirette tra dispositivi. Ogni tipo di cavo ha caratteristiche e usi specifici che garantiscono l'efficienza
-        nella trasmissione delle informazioni. Ad esempio, i cavi HDMI sono spesso utilizzati per trasmettere segnali
-        video ad alta definizione, mentre i cavi Ethernet sono la scelta migliore per una connessione di rete stabile e
-        veloce.
-      </p>
-      <p>
-        Con l'avanzare della tecnologia, alcuni cavi stanno diventando obsoleti, ma i cavi tradizionali continuano a
-        svolgere un ruolo vitale nell'infrastruttura tecnologica. Alcuni cavi sono stati progettati per sopportare
-        segnali ad alta velocità e supportare una maggiore capacità di trasmissione, come nel caso dei cavi in fibra
-        ottica, che sono utilizzati per le connessioni internet a banda larga.
-      </p>
-    </div>
+        .content {
+            padding: 40px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-    <div>
-      <h2>Periferiche</h2>
-      <p>
-        Le periferiche sono dispositivi esterni collegati al computer per ampliarne le funzionalità. Si suddividono in
-        periferiche di input, utilizzate per immettere dati o comandi nel computer, come tastiera, mouse, scanner e
-        microfono; periferiche di output, che visualizzano o producono dati dal computer, come monitor, stampante e
-        altoparlanti; e periferiche di input e output, che permettono sia l'input che l'output di dati, come
-        touchscreen, modem e webcam.
-      </p>
-      <p>
-        Un esempio comune di periferica di input è il mouse, che permette di interagire con il computer spostando il
-        cursore sullo schermo. Le periferiche di output, come il monitor, sono essenziali per vedere ciò che stiamo
-        facendo, sia che si tratti di scrivere un documento, giocare a un videogioco, o guardare un film. Le periferiche
-        che combinano input e output, come le webcam, sono sempre più utilizzate per videoconferenze e streaming.
-      </p>
-      <p>
-        Inoltre, esistono periferiche specializzate, come le stampanti 3D, che permettono di creare oggetti
-        tridimensionali a partire da modelli digitali, e dispositivi come i controller di gioco, che offrono
-        un'interazione immersiva in applicazioni videoludiche avanzate. Le periferiche di archiviazione esterna, come i
-        dischi rigidi e le chiavette USB, sono cruciali per la gestione dei dati e il backup delle informazioni.
-      </p>
-    </div>
+        .section {
+            margin-bottom: 50px;
+        }
 
-    <div id="software">
-      <h2>Software</h2>
-      <p>
-        Il software è un insieme di istruzioni e programmi che dicono a un computer cosa fare. Il software non è
-        tangibile, ma è essenziale per il funzionamento di un computer. Senza software, l'hardware del computer sarebbe
-        inutile. Esistono due tipi di software: software di sistema e software applicativo. Il software di sistema
-        include sistemi operativi come Windows, Android, iOS, Linux, ecc. che gestiscono le risorse del computer e
-        forniscono un'interfaccia tra l'utente e l'hardware.
-      </p>
-      <p>
-        Il software applicativo, invece, è progettato per svolgere compiti specifici per l'utente, come l'elaborazione
-        di testi, la navigazione su Internet, la gestione di foto e video, o la gestione di database. Programmi come
-        Microsoft Word, Photoshop, e il browser web sono esempi di software applicativo. Ogni software è sviluppato per
-        risolvere un problema specifico o per semplificare il lavoro quotidiano dell'utente.
-      </p>
-      <p>
-        Ad esempio, il software di gestione di database è utilizzato in applicazioni aziendali per archiviare e
-        recuperare informazioni, mentre il software di design grafico è essenziale per gli artisti e i designer per
-        creare contenuti visivi. I programmi di video editing come Adobe Premiere o Final Cut Pro sono fondamentali per
-        i professionisti che lavorano con contenuti video ad alta qualità.
-      </p>
-    </div>
+        .note {
+            background-color: #333;
+            color: #f0f0f0;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            font-style: italic;
+            margin-top: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+        }
 
-    <div>
-      <h2>Applicazioni</h2>
-      <p>
-        Le applicazioni e-commerce permettono di comprare e vendere prodotti o servizi online, con funzionalità come la
-        ricerca, il pagamento e il tracciamento delle spedizioni. Esempi famosi sono Amazon e Shopify. Le applicazioni
-        e-learning offrono corsi e contenuti educativi online, consentendo l'apprendimento a distanza. Piattaforme come
-        Coursera e Udemy ne sono esempi, offrendo video, quiz e interazioni tra studenti e insegnanti.
-      </p>
-      <p>
-        Oltre a questi esempi, le applicazioni di social media, come Facebook, Instagram, e Twitter, sono diventate
-        fondamentali per la comunicazione globale, permettendo a milioni di persone di connettersi in tempo reale. Anche
-        le applicazioni di produttività, come Google Docs o Microsoft Office, sono strumenti essenziali per il lavoro
-        quotidiano di milioni di persone in tutto il mondo.
-      </p>
-      <p>
-        Le applicazioni di produttività e lavoro collaborativo, come Slack, Microsoft Teams e Zoom, sono diventate
-        imprescindibili nel mondo moderno, specialmente durante la pandemia, per permettere a team di lavorare insieme a
-        distanza. Queste applicazioni forniscono spazi virtuali per la comunicazione, la gestione dei progetti e la
-        condivisione di file, migliorando la collaborazione a livello globale.
-      </p>
-    </div>
+        .example {
+            background-color: #222;
+            color: #e0e0e0;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 10px;
+            border: 1px solid #444;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
 
-    <p><a href="indice.html">Vai alla pagina indice</a></p>
-  </div>
+      
+        nav {
+            background-color: #1c1c1c;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
 
-</body>
+        nav a {
+            color: #4caf50;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.2em;
+        }
 
-</html>
-<div id="ghezzi">
+        nav a:hover {
+            color: #ffffff;
+        }
 
-  <ul>
+        
+        .chapter {
+            padding-top: 50px;
+        }
+    </style>
 
-    <li><a href="copertina.html">Vai alla copertina</a></li>
-    <li><a href="capitolo1.html">Vai al capitolo 1</a></li>
-    <li><a href="capitolo3.html">Vai al capitolo 3</a></li>
-    <li><a href="capitolo4.html">Vai al capitolo 4</a></li>
-    <li><a href="capitolo5.html">Vai al capitolo 5</a></li>
-  </ul>
-</div>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 2: Componenti del Computer</title>
+    <sty
 
-</body>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-</html>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: radial-gradient(circle at top left, #1b1b1b, #000);
+            color: #f0f0f0;
+            line-height: 1.8;
+            overflow-x: hidden;
+            padding-bottom: 100px;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4em;
+            text-align: center;
+            margin: 60px 0 30px;
+            background: linear-gradient(270deg, #00ff99, #00ccff, #00ff99);
+            background-size: 600% 600%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: animatedGradient 8s ease infinite;
+            text-shadow: 0 0 10px #00ff99, 0 0 20px #00ccff;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            text-align: center;
+            margin: 50px 0 20px;
+            color: #4caf50;
+            text-shadow: 0 0 8px #4caf50;
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        h3 {
+            font-size: 1.8em;
+            margin-top: 30px;
+            color: #80ffbf;
+            text-shadow: 0 0 5px #80ffbf;
+        }
+
+        p, li {
+            font-size: 1.2em;
+            color: #dcdcdc;
+            margin-bottom: 15px;
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        .content {
+            padding: 40px 50px;
+            max-width: 1100px;
+            margin: auto;
+            animation: fadeInSlow 1.5s ease-in-out;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 30px;
+        }
+
+        .note, .example {
+            background-color: rgba(0, 255, 153, 0.1);
+            border-left: 5px solid #00ff99;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 255, 153, 0.3);
+        }
+
+        .index {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0, 255, 153, 0.5);
+        }
+
+        .index h3 {
+            color: #00ff99;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .index a {
+            display: block;
+            color: #ffffff;
+            text-decoration: none;
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        .index a:hover {
+            background-color: #00ff99;
+            color: #000;
+            box-shadow: 0 0 10px #00ff99;
+        }
+
+        nav {
+            background-color: #1c1c1c;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 10px #000;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        nav a {
+            color: #4caf50;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 1.2em;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 8px #4caf50;
+        }
+
+        @keyframes animatedGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInSlow {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
