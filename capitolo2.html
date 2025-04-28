@@ -1,81 +1,93 @@
+<h3>Cos'è l'Informatica</h3>
+<style>
+  body {
+    background-color: black;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+  }
 
 
+  #ghezzi {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #1d1d1d;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  }
 
 
-  <title>Cos'è l'Informatica</title>
-  <style>
-   
-    body {
-      background-color: black;
-      color: white;
-      font-family: 'Arial', sans-serif;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-    }
+  h1,
+  h2 {
+    color: #2ecc71;
+    font-weight: bold;
+    text-align: center;
+    font-size: 2rem;
+  }
 
-   
-    #ghezzi {
-      max-width: 1200px;
-      margin: 30px auto;
-      padding: 20px;
-      background-color: #1d1d1d;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    }
+  p {
+    font-size: 1.1rem;
+    text-align: justify;
+    margin-bottom: 20px;
+  }
 
-    
-    h1, h2 {
-      color: #2ecc71;
-      font-weight: bold;
-      text-align: center;
-      font-size: 2rem;
-    }
 
-    /* Paragrafi */
-    p {
-      font-size: 1.1rem;
-      text-align: justify;
-      margin-bottom: 20px;
-    }
+  ol {
+    margin-left: 40px;
+  }
 
-    
-    ol {
-      margin-left: 40px;
-    }
 
-   
-    div {
-      border: 4px solid #2ecc71;
-      width: auto;
-      padding: 20px;
-      margin-bottom: 30px;
-      border-radius: 8px;
-    }
+  div {
+    border: 4px solid #2ecc71;
+    width: auto;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+  }
 
-    .schede {
-      color: aquamarine;
-    }
+ 
+ 
+  a {
+    display: block;
+    text-align: center;
+    color: #2ecc71;
+    margin-top: 40px;
+    font-size: 1rem;
+    text-decoration: none;
+  }
 
-    /* Link */
-    a {
-      display: block;
-      text-align: center;
-      color: #2ecc71;
-      margin-top: 40px;
-      font-size: 1rem;
-      text-decoration: none;
-    }
+  a:hover {
+    text-decoration: underline;
+  }
 
-    a:hover {
-      text-decoration: underline;
-    }
-  </style>
+  .imghw {
+    padding: 0;
+    text-align: center;    
+    width :5000px;
+    height: auto;
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+</style>
 </head>
+
 <body>
 
   <div id="ghezzi">
     <h1>Capitolo 1: Componenti del Computer</h1>
+    <div class="container">
+      <img class="imghw" src="hw.sw.jpg" alt="errore" />
+    </div>
+
+
 
     <h2>Componenti del Computer</h2>
     <ol>
@@ -87,78 +99,142 @@
     <div id="hardware">
       <h2>Hardware</h2>
       <p>
-        Gli hardware sono tutti i componenti fisici, concreti (cioè che si possono toccare) di un computer. Ad esempio, il processore, la scheda madre, la scheda grafica, la tastiera, il mouse, il monitor e così via. Gli hardware sono fondamentali per il funzionamento di ogni dispositivo tecnologico, poiché senza di essi non sarebbe possibile eseguire alcuna operazione.
+        Gli hardware sono tutti i componenti fisici, concreti (cioè che si possono toccare) di un computer. Ad esempio,
+        il processore, la scheda madre, la scheda grafica, la tastiera, il mouse, il monitor e così via. Gli hardware
+        sono fondamentali per il funzionamento di ogni dispositivo tecnologico, poiché senza di essi non sarebbe
+        possibile eseguire alcuna operazione.
       </p>
       <p>
-        Esistono due tipi di hardware: hardware di input e hardware di output. Gli hardware di input sono dispositivi che permettono di inserire dati o comandi in un computer, come la tastiera, il mouse, il microfono, il joystick, ecc. Gli hardware di output sono dispositivi che ricevono dati dal computer e li presentano all'utente in vari modi, come il monitor, la stampante, le cuffie, ecc. In altre parole, gli hardware di input permettono all'utente di interagire con il sistema, mentre quelli di output restituiscono i risultati di queste interazioni.
+        Esistono due tipi di hardware: hardware di input e hardware di output. Gli hardware di input sono dispositivi
+        che permettono di inserire dati o comandi in un computer, come la tastiera, il mouse, il microfono, il joystick,
+        ecc. Gli hardware di output sono dispositivi che ricevono dati dal computer e li presentano all'utente in vari
+        modi, come il monitor, la stampante, le cuffie, ecc. In altre parole, gli hardware di input permettono
+        all'utente di interagire con il sistema, mentre quelli di output restituiscono i risultati di queste
+        interazioni.
       </p>
       <p>
-        Ogni hardware ha un ruolo fondamentale nel completamento del ciclo di lavoro di un computer. La velocità, la qualità e l'efficienza delle operazioni dipendono dal tipo di hardware installato nel sistema. Inoltre, la compatibilità tra i diversi hardware e il software installato sul computer è essenziale per ottenere prestazioni ottimali.
+        Ogni hardware ha un ruolo fondamentale nel completamento del ciclo di lavoro di un computer. La velocità, la
+        qualità e l'efficienza delle operazioni dipendono dal tipo di hardware installato nel sistema. Inoltre, la
+        compatibilità tra i diversi hardware e il software installato sul computer è essenziale per ottenere prestazioni
+        ottimali.
       </p>
     </div>
 
     <div>
       <h2>Schede</h2>
       <p class="schede">
-        Le schede sono componenti fisici o circuiti stampati che si inseriscono in un computer per aggiungere funzionalità specifiche. Tra gli esempi ci sono le schede madri, che fungono da scheda principale per collegare e permettere la comunicazione tra tutti i componenti del computer, le schede video responsabili del rendering grafico, le schede di rete che consentono la comunicazione su una rete, e le schede audio che si occupano dell'elaborazione dei segnali audio. Ogni scheda ha un ruolo unico che permette al computer di svolgere compiti diversi.
+        Le schede sono componenti fisici o circuiti stampati che si inseriscono in un computer per aggiungere
+        funzionalità specifiche. Tra gli esempi ci sono le schede madri, che fungono da scheda principale per collegare
+        e permettere la comunicazione tra tutti i componenti del computer, le schede video responsabili del rendering
+        grafico, le schede di rete che consentono la comunicazione su una rete, e le schede audio che si occupano
+        dell'elaborazione dei segnali audio. Ogni scheda ha un ruolo unico che permette al computer di svolgere compiti
+        diversi.
       </p>
       <p>
-        In particolare, la scheda madre è uno degli elementi più cruciali in quanto collega tutte le altre schede, incluse quelle video e audio, e permette ai dati di fluire attraverso i vari componenti. La scheda video, invece, è fondamentale per la qualità delle immagini e dei video che vediamo sullo schermo, e per i giochi e applicazioni grafiche avanzate. Allo stesso modo, le schede audio sono essenziali per l'elaborazione dei suoni, permettendo di ascoltare musica, video, o partecipare a videoconferenze.
+        In particolare, la scheda madre è uno degli elementi più cruciali in quanto collega tutte le altre schede,
+        incluse quelle video e audio, e permette ai dati di fluire attraverso i vari componenti. La scheda video,
+        invece, è fondamentale per la qualità delle immagini e dei video che vediamo sullo schermo, e per i giochi e
+        applicazioni grafiche avanzate. Allo stesso modo, le schede audio sono essenziali per l'elaborazione dei suoni,
+        permettendo di ascoltare musica, video, o partecipare a videoconferenze.
       </p>
       <p>
-        Le schede di rete, che permettono la connessione tra il computer e altre risorse come internet o reti locali, sono essenziali in un mondo sempre più connesso. Le moderne schede di rete supportano velocità di trasferimento dati elevate, consentendo streaming in alta definizione e la trasmissione di grandi quantità di informazioni tra dispositivi. Le schede audio, sebbene meno visibili, migliorano l'esperienza multimediale, permettendo una qualità del suono cristallina e l'elaborazione dei segnali in tempo reale.
+        Le schede di rete, che permettono la connessione tra il computer e altre risorse come internet o reti locali,
+        sono essenziali in un mondo sempre più connesso. Le moderne schede di rete supportano velocità di trasferimento
+        dati elevate, consentendo streaming in alta definizione e la trasmissione di grandi quantità di informazioni tra
+        dispositivi. Le schede audio, sebbene meno visibili, migliorano l'esperienza multimediale, permettendo una
+        qualità del suono cristallina e l'elaborazione dei segnali in tempo reale.
       </p>
     </div>
 
     <div>
       <h2>Cavi</h2>
       <p>
-        I cavi sono connettori fisici utilizzati per trasmettere dati o alimentazione tra vari componenti hardware. Alcuni tipi comuni includono i cavi di alimentazione, che forniscono energia ai dispositivi, e i cavi di trasmissione dati, come USB, HDMI, Ethernet e cavi audio. I cavi possono anche variare per velocità di trasmissione e qualità del segnale, per esempio, i cavi USB 3.0 sono più veloci rispetto ai cavi USB 2.0.
+        I cavi sono connettori fisici utilizzati per trasmettere dati o alimentazione tra vari componenti hardware.
+        Alcuni tipi comuni includono i cavi di alimentazione, che forniscono energia ai dispositivi, e i cavi di
+        trasmissione dati, come USB, HDMI, Ethernet e cavi audio. I cavi possono anche variare per velocità di
+        trasmissione e qualità del segnale, per esempio, i cavi USB 3.0 sono più veloci rispetto ai cavi USB 2.0.
       </p>
       <p>
-        Oltre ai cavi fisici, esistono anche soluzioni wireless, come il Wi-Fi o il Bluetooth, che permettono la trasmissione di dati senza l'uso di fili, ma l'importanza dei cavi rimane fondamentale nelle comunicazioni dirette tra dispositivi. Ogni tipo di cavo ha caratteristiche e usi specifici che garantiscono l'efficienza nella trasmissione delle informazioni. Ad esempio, i cavi HDMI sono spesso utilizzati per trasmettere segnali video ad alta definizione, mentre i cavi Ethernet sono la scelta migliore per una connessione di rete stabile e veloce.
+        Oltre ai cavi fisici, esistono anche soluzioni wireless, come il Wi-Fi o il Bluetooth, che permettono la
+        trasmissione di dati senza l'uso di fili, ma l'importanza dei cavi rimane fondamentale nelle comunicazioni
+        dirette tra dispositivi. Ogni tipo di cavo ha caratteristiche e usi specifici che garantiscono l'efficienza
+        nella trasmissione delle informazioni. Ad esempio, i cavi HDMI sono spesso utilizzati per trasmettere segnali
+        video ad alta definizione, mentre i cavi Ethernet sono la scelta migliore per una connessione di rete stabile e
+        veloce.
       </p>
       <p>
-        Con l'avanzare della tecnologia, alcuni cavi stanno diventando obsoleti, ma i cavi tradizionali continuano a svolgere un ruolo vitale nell'infrastruttura tecnologica. Alcuni cavi sono stati progettati per sopportare segnali ad alta velocità e supportare una maggiore capacità di trasmissione, come nel caso dei cavi in fibra ottica, che sono utilizzati per le connessioni internet a banda larga.
+        Con l'avanzare della tecnologia, alcuni cavi stanno diventando obsoleti, ma i cavi tradizionali continuano a
+        svolgere un ruolo vitale nell'infrastruttura tecnologica. Alcuni cavi sono stati progettati per sopportare
+        segnali ad alta velocità e supportare una maggiore capacità di trasmissione, come nel caso dei cavi in fibra
+        ottica, che sono utilizzati per le connessioni internet a banda larga.
       </p>
     </div>
 
     <div>
       <h2>Periferiche</h2>
       <p>
-        Le periferiche sono dispositivi esterni collegati al computer per ampliarne le funzionalità. Si suddividono in periferiche di input, utilizzate per immettere dati o comandi nel computer, come tastiera, mouse, scanner e microfono; periferiche di output, che visualizzano o producono dati dal computer, come monitor, stampante e altoparlanti; e periferiche di input e output, che permettono sia l'input che l'output di dati, come touchscreen, modem e webcam.
+        Le periferiche sono dispositivi esterni collegati al computer per ampliarne le funzionalità. Si suddividono in
+        periferiche di input, utilizzate per immettere dati o comandi nel computer, come tastiera, mouse, scanner e
+        microfono; periferiche di output, che visualizzano o producono dati dal computer, come monitor, stampante e
+        altoparlanti; e periferiche di input e output, che permettono sia l'input che l'output di dati, come
+        touchscreen, modem e webcam.
       </p>
       <p>
-        Un esempio comune di periferica di input è il mouse, che permette di interagire con il computer spostando il cursore sullo schermo. Le periferiche di output, come il monitor, sono essenziali per vedere ciò che stiamo facendo, sia che si tratti di scrivere un documento, giocare a un videogioco, o guardare un film. Le periferiche che combinano input e output, come le webcam, sono sempre più utilizzate per videoconferenze e streaming.
+        Un esempio comune di periferica di input è il mouse, che permette di interagire con il computer spostando il
+        cursore sullo schermo. Le periferiche di output, come il monitor, sono essenziali per vedere ciò che stiamo
+        facendo, sia che si tratti di scrivere un documento, giocare a un videogioco, o guardare un film. Le periferiche
+        che combinano input e output, come le webcam, sono sempre più utilizzate per videoconferenze e streaming.
       </p>
       <p>
-        Inoltre, esistono periferiche specializzate, come le stampanti 3D, che permettono di creare oggetti tridimensionali a partire da modelli digitali, e dispositivi come i controller di gioco, che offrono un'interazione immersiva in applicazioni videoludiche avanzate. Le periferiche di archiviazione esterna, come i dischi rigidi e le chiavette USB, sono cruciali per la gestione dei dati e il backup delle informazioni.
+        Inoltre, esistono periferiche specializzate, come le stampanti 3D, che permettono di creare oggetti
+        tridimensionali a partire da modelli digitali, e dispositivi come i controller di gioco, che offrono
+        un'interazione immersiva in applicazioni videoludiche avanzate. Le periferiche di archiviazione esterna, come i
+        dischi rigidi e le chiavette USB, sono cruciali per la gestione dei dati e il backup delle informazioni.
       </p>
     </div>
 
     <div id="software">
       <h2>Software</h2>
       <p>
-        Il software è un insieme di istruzioni e programmi che dicono a un computer cosa fare. Il software non è tangibile, ma è essenziale per il funzionamento di un computer. Senza software, l'hardware del computer sarebbe inutile. Esistono due tipi di software: software di sistema e software applicativo. Il software di sistema include sistemi operativi come Windows, Android, iOS, Linux, ecc. che gestiscono le risorse del computer e forniscono un'interfaccia tra l'utente e l'hardware.
+        Il software è un insieme di istruzioni e programmi che dicono a un computer cosa fare. Il software non è
+        tangibile, ma è essenziale per il funzionamento di un computer. Senza software, l'hardware del computer sarebbe
+        inutile. Esistono due tipi di software: software di sistema e software applicativo. Il software di sistema
+        include sistemi operativi come Windows, Android, iOS, Linux, ecc. che gestiscono le risorse del computer e
+        forniscono un'interfaccia tra l'utente e l'hardware.
       </p>
       <p>
-        Il software applicativo, invece, è progettato per svolgere compiti specifici per l'utente, come l'elaborazione di testi, la navigazione su Internet, la gestione di foto e video, o la gestione di database. Programmi come Microsoft Word, Photoshop, e il browser web sono esempi di software applicativo. Ogni software è sviluppato per risolvere un problema specifico o per semplificare il lavoro quotidiano dell'utente.
+        Il software applicativo, invece, è progettato per svolgere compiti specifici per l'utente, come l'elaborazione
+        di testi, la navigazione su Internet, la gestione di foto e video, o la gestione di database. Programmi come
+        Microsoft Word, Photoshop, e il browser web sono esempi di software applicativo. Ogni software è sviluppato per
+        risolvere un problema specifico o per semplificare il lavoro quotidiano dell'utente.
       </p>
       <p>
-        Ad esempio, il software di gestione di database è utilizzato in applicazioni aziendali per archiviare e recuperare informazioni, mentre il software di design grafico è essenziale per gli artisti e i designer per creare contenuti visivi. I programmi di video editing come Adobe Premiere o Final Cut Pro sono fondamentali per i professionisti che lavorano con contenuti video ad alta qualità.
+        Ad esempio, il software di gestione di database è utilizzato in applicazioni aziendali per archiviare e
+        recuperare informazioni, mentre il software di design grafico è essenziale per gli artisti e i designer per
+        creare contenuti visivi. I programmi di video editing come Adobe Premiere o Final Cut Pro sono fondamentali per
+        i professionisti che lavorano con contenuti video ad alta qualità.
       </p>
     </div>
 
     <div>
       <h2>Applicazioni</h2>
       <p>
-        Le applicazioni e-commerce permettono di comprare e vendere prodotti o servizi online, con funzionalità come la ricerca, il pagamento e il tracciamento delle spedizioni. Esempi famosi sono Amazon e Shopify. Le applicazioni e-learning offrono corsi e contenuti educativi online, consentendo l'apprendimento a distanza. Piattaforme come Coursera e Udemy ne sono esempi, offrendo video, quiz e interazioni tra studenti e insegnanti.
+        Le applicazioni e-commerce permettono di comprare e vendere prodotti o servizi online, con funzionalità come la
+        ricerca, il pagamento e il tracciamento delle spedizioni. Esempi famosi sono Amazon e Shopify. Le applicazioni
+        e-learning offrono corsi e contenuti educativi online, consentendo l'apprendimento a distanza. Piattaforme come
+        Coursera e Udemy ne sono esempi, offrendo video, quiz e interazioni tra studenti e insegnanti.
       </p>
       <p>
-        Oltre a questi esempi, le applicazioni di social media, come Facebook, Instagram, e Twitter, sono diventate fondamentali per la comunicazione globale, permettendo a milioni di persone di connettersi in tempo reale. Anche le applicazioni di produttività, come Google Docs o Microsoft Office, sono strumenti essenziali per il lavoro quotidiano di milioni di persone in tutto il mondo.
+        Oltre a questi esempi, le applicazioni di social media, come Facebook, Instagram, e Twitter, sono diventate
+        fondamentali per la comunicazione globale, permettendo a milioni di persone di connettersi in tempo reale. Anche
+        le applicazioni di produttività, come Google Docs o Microsoft Office, sono strumenti essenziali per il lavoro
+        quotidiano di milioni di persone in tutto il mondo.
       </p>
       <p>
-        Le applicazioni di produttività e lavoro collaborativo, come Slack, Microsoft Teams e Zoom, sono diventate imprescindibili nel mondo moderno, specialmente durante la pandemia, per permettere a team di lavorare insieme a distanza. Queste applicazioni forniscono spazi virtuali per la comunicazione, la gestione dei progetti e la condivisione di file, migliorando la collaborazione a livello globale.
+        Le applicazioni di produttività e lavoro collaborativo, come Slack, Microsoft Teams e Zoom, sono diventate
+        imprescindibili nel mondo moderno, specialmente durante la pandemia, per permettere a team di lavorare insieme a
+        distanza. Queste applicazioni forniscono spazi virtuali per la comunicazione, la gestione dei progetti e la
+        condivisione di file, migliorando la collaborazione a livello globale.
       </p>
     </div>
 
@@ -166,11 +242,12 @@
   </div>
 
 </body>
+
 </html>
 <div id="ghezzi">
-  
+
   <ul>
-   
+
     <li><a href="copertina.html">Vai alla copertina</a></li>
     <li><a href="capitolo1.html">Vai al capitolo 1</a></li>
     <li><a href="capitolo3.html">Vai al capitolo 3</a></li>
@@ -179,54 +256,6 @@
   </ul>
 </div>
 
+</body>
 
-    </style>
-
-
-
-
-<p>.</p>
-<div>
-    <h2> applicazioni</h2>
-
-    Applicazioni Le applicazioni e-commerce permettono comprare e vebdere prodotti o servizi online, 
-    con funzionalità come la ricerca, il pagamento e il tracciamento delle spedizioni. Esempi famosi
-     sono Amazon e Shopify. Le applicazioni e-learning offrono corsi e contenuti educativi online, 
-     consentendo l'apprendimento a distanza. Piattaforme come Coursera e Udemy ne sono esempi, offrendo 
-     video, quiz e interazioni tra studenti e insegnanti.
-    </div>
-     <style>
-
-div {
-      border: 12px;
-      width: 200px;
-      border-color: green;
-      border-style: ridge;
-      padding: 20px;
-      float: left;
-
-    }
-</style>
-
-<style>
-body {
-background-color:black;
-}
-</style>
-
-
-<style>
-    body {
-    color:white;
-    }
-    </style>
-    
-    
-    <style>
-        p {
-        color:black;
-        }
-        </style>
-    <br>
-    <a href="indice.html"> vai alla pagina indice </a>
-  </br>
+</html>

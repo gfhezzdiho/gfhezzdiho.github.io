@@ -1,0 +1,246 @@
+
+    <title>Capitolo 5: Le Reti</title>
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+      
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #f0f0f0;
+            margin: 0;
+            line-height: 1.8;
+            padding: 0;
+        }
+
+        
+        h1, h2 {
+            font-family: 'Roboto', sans-serif;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            letter-spacing: 2px;
+            padding-top: 20px;
+        }
+
+        h2 {
+            color: #4caf50;
+            font-size: 2.5em;
+            margin-top: 20px;
+            letter-spacing: 1px;
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #dcdcdc;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            padding: 40px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        
+        .note {
+            background-color: #333;
+            color: #f0f0f0;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            font-style: italic;
+            margin-top: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+        }
+
+        .note strong {
+            color: #4caf50;
+        }
+
+    
+        .example {
+            background-color: #222;
+            color: #e0e0e0;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 10px;
+            border: 1px solid #444;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .example strong {
+            color: #4caf50;
+        }
+
+       
+        .callout {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            margin-top: 40px;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+        }
+
+        .callout:hover {
+            background-color: #388e3c;
+        }
+
+        .diagram {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        img {
+            width: 85%;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+        }
+
+        
+        a {
+            color: #4caf50;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: #f1f1f1;
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            color: #888;
+            padding: 30px 0;
+            background-color: #1f1f1f;
+            margin-top: 50px;
+            font-size: 1em;
+        }
+
+        footer a {
+            color: #4caf50;
+        }
+
+        footer a:hover {
+            color: #ffffff;
+        }
+
+        .index {
+            position: fixed;
+            top: 20%;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+
+        .index a {
+            color: #ffffff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .index a:hover {
+            color: #4caf50;
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="content">
+        <h1>Capitolo 5: Le Reti</h1>
+
+        <div class="index">
+            <h3>Indice</h3>
+            <a href="#rete">1) Cos'è una rete?</a>
+            <a href="#pan">2) Personal Area Network</a>
+            <a href="#lan">3) Local Area Network</a>
+            <a href="#wan">4) Wide Area Network</a>
+            <a href="#gan">5) Global Area Network</a>
+            <a href="#internet">6) Architettura di Internet</a>
+        </div>
+
+        <div id="rete" class="section">
+            <h2>1) Cos'è una rete?</h2>
+            <p>Una rete è un sistema che collega vari dispositivi per permettere la condivisione di risorse, l'invio e la ricezione di dati. Le reti si possono classificare in base alla loro dimensione, come le **Personal Area Network (PAN)**, **Local Area Network (LAN)**, **Wide Area Network (WAN)**, e **Global Area Network (GAN)**.</p>
+            <p>Le reti sono fondamentali nel mondo digitale, poiché consentono di ottimizzare le risorse, accelerare la comunicazione e garantire l'accesso remoto ai dati e ai servizi. Le comunicazioni tra i dispositivi in rete avvengono tramite pacchetti di dati che viaggiano su supporti cablati o wireless.</p>
+            <div class="note">
+                <strong>Nota:</strong> Le reti possono essere di vari tipi, cablate o wireless, a seconda delle necessità di velocità, sicurezza e mobilità.
+            </div>
+        </div>
+
+        <div id="pan" class="section">
+            <h2>2) Personal Area Network (PAN)</h2>
+            <p>La **Personal Area Network (PAN)** è una rete che opera su una distanza molto breve, tipicamente entro i 10 metri. Viene utilizzata per connettere dispositivi personali, come telefoni, computer portatili, stampanti e dispositivi Bluetooth. Le PAN sono ideali per connessioni rapide e locali, garantendo un buon livello di sicurezza e basso consumo energetico.</p>
+            <p>Le tecnologie utilizzate nelle PAN includono **Bluetooth** per le connessioni a corto raggio, **NFC (Near Field Communication)** per interazioni rapidi tra dispositivi e **InfraRed (IR)** per la trasmissione di dati senza fili, ideali per la connessione di dispositivi portatili come smartphone, auricolari, e smartwatch.</p>
+            <div class="example">
+                <strong>Esempio di PAN:</strong><br>
+                Un utente collega il suo smartphone a un altoparlante Bluetooth per riprodurre musica senza fili. Questo tipo di connessione avviene all'interno di una PAN.
+            </div>
+        </div>
+
+        <div id="lan" class="section">
+            <h2>3) Local Area Network (LAN)</h2>
+            <p>Una **Local Area Network (LAN)** è una rete che collega dispositivi in un'area geografica ristretta, come una casa, un ufficio o una scuola. Le LAN permettono la condivisione di risorse e una comunicazione rapida tra i dispositivi collegati. Grazie alla LAN, i dispositivi possono comunicare senza dover passare attraverso internet, garantendo prestazioni elevate.</p>
+            <p>Le LAN possono essere **cablata** (tramite Ethernet) o **wireless** (tramite Wi-Fi). Le LAN cablate sono più sicure e veloci, mentre le LAN wireless offrono maggiore flessibilità e mobilità. L'uso delle LAN è fondamentale per l'installazione di sistemi di rete domestici e aziendali.</p>
+            <div class="note">
+                <strong>Nota:</strong> Un ufficio può avere una LAN per permettere ai suoi dipendenti di condividere file, stampanti e altre risorse hardware in modo rapido ed efficiente.
+            </div>
+        </div>
+
+        <div id="wan" class="section">
+            <h2>4) Wide Area Network (WAN)</h2>
+            <p>Una **Wide Area Network (WAN)** copre un'area geografica molto ampia, come una città, un paese o addirittura il mondo intero. Le WAN sono utilizzate per connettere più LAN e permettere la comunicazione tra sedi distanti. Una WAN consente a dispositivi di comunicare e condividere informazioni anche a migliaia di chilometri di distanza.</p>
+            <p>Le WAN si basano su tecnologie come **fibra ottica**, **linee dedicate** o **comunicazioni satellitari** per trasferire grandi quantità di dati su lunghe distanze. La **fibra ottica** è particolarmente vantaggiosa per la velocità di trasmissione dei dati e la **bassa latenza**.</p>
+            <div class="example">
+                <strong>Esempio di WAN:</strong><br>
+                Le aziende con filiali internazionali utilizzano una WAN per connettere le loro diverse sedi in tutto il mondo, permettendo una comunicazione efficiente e sicura.
+            </div>
+        </div>
+
+        <div id="gan" class="section">
+            <h2>5) Global Area Network (GAN)</h2>
+            <p>Una **Global Area Network (GAN)** è una rete che collega dispositivi e sistemi su scala globale, come nel caso di Internet, la più grande GAN mai esistita. Le GAN permettono la connessione di milioni di dispositivi attraverso continenti e paesi. Internet, infatti, è la più famosa delle GAN, ma ne esistono anche altre reti globali destinate ad applicazioni particolari come la navigazione satellitare e la gestione delle risorse naturali.</p>
+            <p>Le GAN si basano su una combinazione di tecnologie, tra cui reti a **fibra ottica**, **Wi-Fi**, **satelliti** e **cavi sottomarini** che trasferiscono dati tra le varie nazioni e regioni. La copertura globale offerta da una GAN è un aspetto cruciale per la comunicazione moderna, così come per la distribuzione dei dati e dei contenuti.</p>
+            <div class="example">
+                <strong>Esempio di GAN:</strong><br>
+                Internet è un esempio perfetto di una GAN, che collega miliardi di utenti in tutto il mondo e fornisce l'accesso a una vasta gamma di informazioni e servizi.
+            </div>
+        </div>
+
+        <div id="internet" class="section">
+            <h2>6) Architettura di Internet</h2>
+            <p>Internet è una rete globale che permette la comunicazione tra milioni di dispositivi. La sua architettura è basata su una serie di protocolli, come il **TCP/IP**, che garantiscono la trasmissione affidabile dei dati da un punto all'altro della rete. Ogni dispositivo sulla rete ha un indirizzo unico, chiamato **indirizzo IP**.</p>
+            <p>I dati vengono inviati sotto forma di pacchetti, che viaggiano attraverso router e switch fino a raggiungere la destinazione finale. Internet è un'infrastruttura decentralizzata, il che significa che non esiste un singolo punto di controllo che governi l'intero sistema, garantendo così robustezza e resilienza alle interruzioni.</p>
+           
+        </div>
+    </div>
+
+    
+</body>
+</html>
