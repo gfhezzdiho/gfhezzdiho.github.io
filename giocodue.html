@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gioco Saltatore</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #74b9ff; /* Azzurro cielo */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        canvas {
+            background-color: #e1e8f0; /* Sfondo chiaro */
+            border: 2px solid #2d3436;
+        }
+
+        #gameOverMessage {
+            display: none;
+            font-size: 40px;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="gameCanvas"></canvas>
+    <div id="gameOverMessage">GAME OVER! Premi F5 per riprovare.</div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const gameOverMessage = document.getElementById('gameOverMessage');
+
+        canvas.width = 800;
+        canvas.height = 600;
+
+        const playerWidth = 50;
+        const playerHeight = 50;
+        const obstacleWidth = 60;
+        const obstacleHeight = 50;
+
+        let playerX = canvas.width / 2 - playerWidth / 2;
+        let playerY = canvas.height - playerHeight - 10;
+        let playerSpeed = 7;
+        let jumpHeight = 0;
+        let isJumping = false;
+        let gravity = 1.5;
+        let obstacles = [];
+        let gameSpeed = 5;
+        let gameOver = false;
+
+        // Controlli
+        let moveLeft = false;
+        let moveRight = false;
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' || e.key === 'a') {
+                moveLeft = true;
+            }
+            if (e.key === 'ArrowRight' || e.key === 'd') {
+                moveRight = true;
+            }
+            if (e.key === ' ' && !isJumping) { // Spazio per saltare
+                isJumping = true;
+            }
+        });
+
+        window.addEventListener('keyup', (e) => {
+            if (e.key === 'ArrowLeft' || e.key === 'a') {
+                moveLeft = false;
+            }
+            if (e.key === 'ArrowRight' || e.key === 'd') {
+                moveRight = false;
+            }
+        });
+
+        function createObstacle() {
+            const x = Math.floor(Math.random() * (canvas.width - obstacleWidth));
+            const y = -obstacleHeight;
+            obstacles.push({x, y});
+        }
+
+        function movePlayer() {
+            if (moveLeft && playerX > 0) {
+                playerX -= playerSpeed;
+            }
+            if (moveRight && playerX < canvas.width - playerWidth) {
+                playerX += playerSpeed;
+            }
+
+            if (isJumping) {
+                if (jumpHeight < 100) {
+                    jumpHeight += 10;
+                } else {
+                    isJumping = false;
+                }
+            } else {
+                if (jumpHeight > 0) {
+                    jumpHeight -= gravity;
+                }
+            }
+        }
+
+        function moveObstacles() {
+            for (let i = 0; i < obstacles.length; i++) {
+                obstacles[i].y += gameSpeed;
+                if (obstacles[i].y > canvas.height) {
+                    obstacles.splice(i, 1);
+                    i--;
+                }
+            }
+        }
+
+        function checkCollisions() {
+            for (let i = 0; i < obstacles.length; i++) {
+                if (
+                    playerX < obstacles[i].x + obstacleWidth &&
+                    playerX + playerWidth > obstacles[i].x &&
+                    playerY + jumpHeight < obstacles[i].y + obstacleHeight &&
+                    playerY + jumpHeight + playerHeight > obstacles[i].y
+                ) {
+                    gameOver = true;
+                }
+            }
+        }
+
+        function drawPlayer() {
+            ctx.fillStyle = '#d63031'; // Rosso per il personaggio
+            ctx.fillRect(playerX, playerY - jumpHeight, playerWidth, playerHeight);
+        }
+
+        function drawObstacles() {
+            ctx.fillStyle = '#2d3436'; // Colore scuro per gli ostacoli
+            for (let i = 0; i < obstacles.length; i++) {
+                ctx.fillRect(obstacles[i].x, obstacles[i].y, obstacleWidth, obstacleHeight);
+            }
+        }
+
+        function draw() {
+            if (gameOver) {
+                gameOverMessage.style.display = 'block';
+                return;
+            }
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            movePlayer();
+            moveObstacles();
+            checkCollisions();
+
+            drawPlayer();
+            drawObstacles();
+
+            requestAnimationFrame(draw);
+        }
+
+        function gameLoop() {
+            if (!gameOver) {
+                createObstacle();
+            }
+            draw();
+        }
+
+        setInterval(gameLoop, 1500); // Aumentato il ritmo per generare ostacoli più velocemente
+    </script>
+
+</body>
+</html>
+

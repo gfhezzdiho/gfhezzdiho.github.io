@@ -1,7 +1,4 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
+
     <title>Memory Pokémon: Sfida di Lucario</title>
     <style>
         body {
@@ -101,9 +98,8 @@
         const pokemonImages = [
             "1", "4", "7", "25", "39", "52", "133", "143"
         ];
-        const cards = [...pokemonImages, ...pokemonImages]; // 16 carte, 8 coppie
-
-        // Mescola le carte
+        const cards = [...pokemonImages, ...pokemonImages]; 
+        
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));

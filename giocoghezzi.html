@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Platform Game Deluxe</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    canvas {
+      background: linear-gradient(to top, #1a1a1a, #333);
+      display: block;
+      margin: 0 auto;
+      border: 5px solid #fff;
+      border-radius: 10px;
+    }
+
+    body {
+      background-color: black;
+      font-family: sans-serif;
+    }
+
+    #hud {
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="hud">Player1: 0 | Player2: 0</div>
+  <canvas id="gameCanvas" width="960" height="480"></canvas>
+
+  <audio id="music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3&quot; autoplay loop></audio>
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+    const hud = document.getElementById("hud");
+
+    const gravity = 0.5;
+
+    const keys = {};
+
+    class Player {
+      constructor(x, y, color, controls) {
+        this.x = x;
+        this.y = y;
+        this.width = 40;
+        this.height = 50;
+        this.dx = 0;
+        this.dy = 0;
+        this.speed = 4;
+        this.jumping = false;
+        this.color = color;
+        this.score = 0;
+        this.controls = controls;
+      }
+
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+      }
+
+      update() {
+        if (keys[this.controls.left]) this.dx = -this.speed;
+        else if (keys[this.controls.right]) this.dx = this.speed;
+        else this.dx = 0;
+
+        if (keys[this.controls.jump] && !this.jumping) {
+          this.dy = -10;
+          this.jumping = true;
+        }
+
+        this.x += this.dx;
+        this.y += this.dy;
+        this.dy += gravity;
+
+        for (let p of platforms) {
+          if (
+            this.x < p.x + p.width &&
+            this.x + this.width > p.x &&
+            this.y + this.height < p.y + 10 &&
+            this.y + this.height + this.dy >= p.y
+          ) {
+            this.y = p.y - this.height;
+            this.dy = 0;
+            this.jumping = false;
+          }
+        }
+
+        // Raccogli collezionabili
+        for (let c of collectibles) {
+          if (!c.collected &&
+              this.x < c.x + c.size &&
+              this.x + this.width > c.x &&
+              this.y < c.y + c.size &&
+              this.y + this.height > c.y) {
+            c.collected = true;
+            this.score++;
+            updateHUD();
+          }
+        }
+
+        // Collisione con nemico
+        for (let e of enemies) {
+          if (
+            this.x < e.x + e.size &&
+            this.x + this.width > e.x &&
+            this.y < e.y + e.size &&
+            this.y + this.height > e.y
+          ) {
+            this.score = Math.max(0, this.score - 1);
+            this.x = 50;
+            this.y = 300;
+            updateHUD();
+          }
+        }
+
+        // Limiti schermo
+        if (this.x < 0) this.x = 0;
+        if (this.x + this.width > canvas.width) this.x = canvas.width - this.width;
+      }
+    }
+
+    class Platform {
+      constructor(x, y, width, height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+      }
+
+      draw() {
+        ctx.fillStyle = "#444";
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+      }
+    }
+
+    class Collectible {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.size = 20;
+        this.collected = false;
+      }
+
+      draw() {
+        if (!this.collected) {
+          ctx.fillStyle = "yellow";
+          ctx.beginPath();
+          ctx.arc(this.x + 10, this.y + 10, 10, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+    }
+
+    class Enemy {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.size = 30;
+        this.direction = 1;
+      }
+
+      draw() {
+        ctx.fillStyle = "red";
+        ctx.fillRect(this.x, this.y, this.size, this.size);
+      }
+
+      update() {
+        this.x += this.direction * 2;
+        if (this.x < 100 || this.x > 700) this.direction *= -1;
+      }
+    }
+
+    // Setup
+    const player1 = new Player(50, 300, "#00ff88", { left: "ArrowLeft", right: "ArrowRight", jump: "Numpad0" });
+    const player2 = new Player(100, 300, "#00aaff", { left: "KeyA", right: "KeyD", jump: "KeyW" });
+
+    const platforms = [
+      new Platform(0, 430, canvas.width, 50),
+      new Platform(150, 360, 120, 15),
+      new Platform(350, 300, 100, 15),
+      new Platform(550, 240, 100, 15),
+      new Platform(750, 180, 120, 15)
+    ];
+
+    const collectibles = [
+      new Collectible(180, 330),
+      new Collectible(380, 270),
+      new Collectible(580, 210),
+      new Collectible(780, 150)
+    ];
+
+    const enemies = [
+      new Enemy(400, 400),
+      new Enemy(650, 400)
+    ];
+
+    function updateHUD() {
+      hud.innerText = `Player1: ${player1.score} | Player2: ${player2.score}`;
+    }
+
+    function loop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      platforms.forEach(p => p.draw());
+      collectibles.forEach(c => c.draw());
+      enemies.forEach(e => {
+        e.update();
+        e.draw();
+      });
+
+      player1.update();
+      player2.update();
+      player1.draw();
+      player2.draw();
+
+      requestAnimationFrame(loop);
+    }
+
+    document.addEventListener("keydown", e => keys[e.code] = true);
+    document.addEventListener("keyup", e => keys[e.code] = false);
+
+    updateHUD();
+    loop();
+  </script>
+</body>
+</html>

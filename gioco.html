@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Click Game!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #2c3e50;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        .game-container {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            width: 400px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .score {
+            font-size: 2rem;
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        #square {
+            width: 100px;
+            height: 100px;
+            background-color: #1abc9c;
+            border-radius: 10px;
+            position: absolute;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        #start-btn {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #start-btn:hover {
+            background-color: #2980b9;
+        }
+
+        #start-btn:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="game-container">
+        <p class="score" id="score">Punteggio: 0</p>
+        <button id="start-btn" onclick="startGame()">Inizia Gioco</button>
+    </div>
+
+    <div id="square"></div>
+
+    <script>
+        let score = 0;
+        let gameStarted = false;
+        let gameInterval;
+        let square = document.getElementById("square");
+        let startButton = document.getElementById("start-btn");
+        let scoreDisplay = document.getElementById("score");
+
+        function startGame() {
+            if (gameStarted) return;  // Evita di avviare più volte il gioco
+
+            gameStarted = true;
+            score = 0;
+            scoreDisplay.innerText = `Punteggio: ${score}`;
+
+            // Nascondi il pulsante di avvio
+            startButton.style.display = "none";
+
+            // Muovi il quadrato a intervalli casuali
+            gameInterval = setInterval(moveSquare, 500); // Muove ogni 500 ms (frequenza)
+
+            // Imposta il timer di 30 secondi
+            setTimeout(endGame, 30000); // Gioco finisce dopo 30 secondi
+        }
+
+        function moveSquare() {
+            let maxWidth = window.innerWidth - 100;
+            let maxHeight = window.innerHeight - 100;
+
+            let randomX = Math.floor(Math.random() * maxWidth);
+            let randomY = Math.floor(Math.random() * maxHeight);
+
+            square.style.left = randomX + "px";
+            square.style.top = randomY + "px";
+        }
+
+        // Aggiungi il listener per il clic sul quadrato
+        square.addEventListener("click", () => {
+            if (!gameStarted) return;
+
+            score++;
+            scoreDisplay.innerText = `Punteggio: ${score}`;
+        });
+
+        // Funzione per fermare il gioco
+        function endGame() {
+            gameStarted = false;
+            clearInterval(gameInterval); // Ferma il movimento del quadrato
+            startButton.style.display = "block"; // Rendi visibile il pulsante di inizio
+            startButton.innerText = "Gioca Ancora"; // Cambia il testo del pulsante
+        }
+    </script>
+
+</body>
+</html>

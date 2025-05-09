@@ -1,4 +1,5 @@
 
+
     <title>Capitolo 2: Componenti del Computer</title>
     <style>
         * {
@@ -6,47 +7,46 @@
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #121212;
             color: #f0f0f0;
+            margin: 0;
             line-height: 1.8;
+            padding: 0;
         }
+
         h1, h2 {
             font-family: 'Roboto', sans-serif;
-            text-align: center;
-            margin: 30px 0;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 30px;
         }
-        h1 {
-            font-size: 3.5em;
-            letter-spacing: 2px;
-        }
+
         h2 {
             color: #4caf50;
             font-size: 2.5em;
+            margin-top: 20px;
         }
+
         p {
             font-size: 1.2em;
             color: #dcdcdc;
             margin-bottom: 20px;
         }
+
         .content {
             padding: 40px 50px;
             max-width: 1200px;
-            margin: auto;
+            margin: 0 auto;
         }
+
         .section {
             margin-bottom: 50px;
         }
-        .note, .example {
-            background-color: #333;
-            border-left: 4px solid #4caf50;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-            margin-top: 20px;
-        }
+
         .index {
             position: fixed;
             top: 20%;
@@ -56,6 +56,7 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
         }
+
         .index a {
             color: #ffffff;
             font-size: 1.1em;
@@ -63,219 +64,11 @@
             margin-bottom: 10px;
             text-decoration: none;
         }
+
         .index a:hover {
             color: #4caf50;
         }
-    </style>
-</head>
 
-    <title>Capitolo 2: Componenti del Computer</title>
-    <style>
-       
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212;
-            color: #f0f0f0;
-            margin: 0;
-            line-height: 1.8;
-            padding: 0;
-        }
-
-        h1, h2 {
-            font-family: 'Roboto', sans-serif;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-            color: #ffffff;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        h2 {
-            color: #4caf50;
-            font-size: 2.5em;
-            margin-top: 20px;
-        }
-
-        p {
-            font-size: 1.2em;
-            color: #dcdcdc;
-            margin-bottom: 20px;
-        }
-
-        .content {
-            padding: 40px 50px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section {
-            margin-bottom: 50px;
-        }
-
-        .note {
-            background-color: #333;
-            color: #f0f0f0;
-            border-left: 4px solid #4caf50;
-            padding: 20px;
-            font-style: italic;
-            margin-top: 20px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
-        }
-
-        .example {
-            background-color: #222;
-            color: #e0e0e0;
-            padding: 20px;
-            margin-top: 30px;
-            border-radius: 10px;
-            border: 1px solid #444;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-        }
-    </style>
-</head>
-<body>
-
-    <div class="content">
-        <h1>Capitolo 2: Componenti del Computer</h1>
-
-        <div class="index">
-            <h3>Indice</h3>
-            <a href="#von-neumann">1) Architettura di Von Neumann</a>
-            <a href="#hardware">2) Hardware</a>
-            <a href="#software">3) Software</a>
-        </div>
-
-        <div id="von-neumann" class="section">
-            <h2>1) Architettura di Von Neumann</h2>
-            <p>L'architettura di Von Neumann, proposta da John Von Neumann negli anni '40, è il modello di base su cui si basano la maggior parte dei computer moderni. In questo schema, i dati e le istruzioni vengono immagazzinati nella stessa memoria, il che consente di eseguire programmi che possono essere modificati. L'idea centrale di questo modello è la presenza di una memoria comune per le istruzioni del programma e i dati, a differenza di modelli precedenti che prevedevano memorie separate per i due tipi di informazioni. Questo approccio ha reso più facile la progettazione di computer programmabili e la creazione di software più complessi.</p>
-
-            <p>La struttura dell'architettura di Von Neumann si compone di cinque componenti principali, ognuna delle quali svolge un ruolo cruciale nel funzionamento del computer. Questi sono:</p>
-            <ul>
-                <li><strong>Unità di controllo:</strong> Questa componente è incaricata di interpretare le istruzioni memorizzate in memoria e di coordinarne l'esecuzione. Gestisce i flussi di dati tra le altre unità, come l'ALU e la memoria, e assicura che il processore esegua correttamente ogni operazione.</li>
-                <li><strong>Unità Aritmetica e Logica (ALU):</strong> L'ALU è responsabile dell'esecuzione delle operazioni matematiche e logiche, come somma, sottrazione, moltiplicazione, divisione, e confronti logici. Essa manipola i dati in base alle istruzioni ricevute dalla CPU.</li>
-                <li><strong>Memoria:</strong> La memoria è un elemento centrale nell'architettura di Von Neumann. Essa è utilizzata per immagazzinare sia i dati che le istruzioni. Le informazioni in memoria sono organizzate in indirizzi e possono essere recuperate dalla CPU in base alle necessità del programma in esecuzione.</li>
-                <li><strong>Dispositivi di Input/Output:</strong> Questi dispositivi permettono al computer di comunicare con l'esterno, ricevendo dati in ingresso (come dalla tastiera o dal mouse) e fornendo risultati in uscita (come a un monitor o a una stampante).</li>
-                <li><strong>Bus:</strong> Il bus è un canale di comunicazione che consente il trasferimento di dati e istruzioni tra la memoria, la CPU e i dispositivi di I/O. Il bus è fondamentale per il funzionamento del computer, poiché collega tutti gli altri componenti e consente loro di interagire.</li>
-            </ul>
-            <div class="note">
-                <strong>Nota:</strong> Sebbene l'architettura di Von Neumann abbia avuto un impatto significativo sulla progettazione dei computer, essa presenta anche dei limiti, come il "bottleneck" della memoria, che può rallentare le prestazioni del sistema in caso di elevate richieste di dati.
-            </div>
-        </div>
-
-        <div id="hardware" class="section">
-            <h2>2) Hardware</h2>
-            <p>L'hardware è l'insieme di tutti i componenti fisici di un computer. Esso comprende tutte le parti che possiamo toccare, come la tastiera, il monitor, la CPU e i dispositivi di memoria. Questi componenti lavorano insieme per eseguire i programmi e gestire i dati.</p>
-
-            <h3>a) Schede</h3>
-            <p>Le schede sono componenti essenziali del computer. La scheda madre è il circuito principale che collega e coordina tutte le altre componenti hardware. Essa ospita il processore (CPU), la memoria RAM, i dispositivi di connessione come porte USB ed Ethernet, e le schede di espansione. Le schede di espansione, come le schede video, audio e di rete, aggiungono funzionalità al sistema.</p>
-
-            <p>Oltre alla scheda madre, ci sono altre schede importanti per il corretto funzionamento del computer, tra cui:</p>
-            <ul>
-                <li><strong>Scheda video:</strong> gestisce la visualizzazione delle immagini sul monitor, decodificando i segnali grafici e producendo l'output visibile. È fondamentale per l'elaborazione grafica e i giochi.</li>
-                <li><strong>Scheda audio:</strong> consente al computer di riprodurre e registrare suoni, processando i segnali audio in entrata e in uscita.</li>
-                <li><strong>Scheda di rete:</strong> consente al computer di connettersi a una rete, sia tramite cavo (Ethernet) che wireless (Wi-Fi), per accedere a Internet o ad altri dispositivi in rete.</li>
-            </ul>
-
-            <h3>b) Cavi</h3>
-            <p>I cavi sono utilizzati per trasmettere dati e alimentazione tra i vari componenti hardware del computer. I cavi di alimentazione forniscono energia alla CPU, alla scheda madre e ad altri dispositivi, mentre i cavi dati, come i cavi USB, SATA e HDMI, permettono il trasferimento di informazioni tra dispositivi.</p>
-
-            <h3>c) Periferiche</h3>
-            <p>Le periferiche sono dispositivi esterni che si collegano al computer per migliorare o ampliare le sue capacità. Le periferiche di input, come la tastiera, il mouse e il microfono, permettono agli utenti di interagire con il computer, inviando comandi e dati. Le periferiche di output, come il monitor, la stampante e gli altoparlanti, forniscono feedback visivo, sonoro e stampato. Alcuni dispositivi, come i touchscreen e i modem, funzionano sia come dispositivi di input che di output, consentendo una comunicazione bidirezionale.</p>
-        </div>
-
-        <div id="software" class="section">
-            <h2>3) Software</h2>
-            <p>Il software è l'insieme di programmi, istruzioni e applicazioni che permettono di utilizzare il computer per svolgere compiti specifici. A differenza dell'hardware, il software non è fisico, ma è rappresentato da linee di codice che istruiscono la macchina su come eseguire determinate azioni.</p>
-
-            <h3>a) Firmware</h3>
-            <p>Il firmware è un tipo di software che è "incorporato" direttamente nell'hardware. È progettato per fornire le funzioni di base necessarie per far funzionare i dispositivi. Esempi di firmware includono il BIOS (Basic Input/Output System) dei computer, che è responsabile per l'avvio del sistema operativo e per l'interazione iniziale con i dispositivi hardware. Il firmware è specifico per ciascun dispositivo e spesso non può essere modificato facilmente dall'utente, a meno che non vengano eseguite operazioni avanzate di aggiornamento o ripristino.</p>
-
-            <h3>b) Sistemi Operativi</h3>
-            <p>Il sistema operativo è un software fondamentale che gestisce l'intero sistema del computer. Eseguito direttamente sulla CPU, il sistema operativo gestisce le risorse hardware, come la memoria e il processore, e fornisce servizi essenziali per l'esecuzione dei programmi. I sistemi operativi più conosciuti sono Windows, macOS e Linux, ognuno dei quali ha caratteristiche proprie, ma tutti permettono agli utenti di interagire con il computer tramite un'interfaccia grafica o una linea di comando.</p>
-
-            <h3>c) Applicazioni</h3>
-            <p>Le applicazioni sono programmi software progettati per svolgere compiti specifici, come la scrittura di documenti, la navigazione sul web o l'elaborazione di fogli di calcolo. Le applicazioni sono eseguite all'interno del sistema operativo e possono essere installate o scaricate da Internet. Esempi comuni di applicazioni includono Microsoft Word, Google Chrome, Photoshop, e Microsoft Excel. Ogni applicazione è progettata per risolvere un determinato problema o soddisfare una necessità dell'utente, e la sua efficienza dipende dal sistema operativo e dall'hardware su cui è eseguita.</p>
-        </div>
-    </div>
-
-</body>
-</html>
-
-<body>
-
-
-  <nav>
-      <a href="#capitolo2">Capitolo 2: </a>
-      <a href="#capitolo3">Capitolo 3: </a>
-      <a href="#capitolo4">Capitolo 4: </a>
-      <a href="#capitolo5">Capitolo 5</a>
-  </nav>
-
-  <head>
-    
-    <title>Capitoli di Informatica</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212;
-            color: #f0f0f0;
-            margin: 0;
-            line-height: 1.8;
-            padding: 0;
-        }
-
-        h1, h2 {
-            font-family: 'Roboto', sans-serif;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-            color: #ffffff;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        h2 {
-            color: #4caf50;
-            font-size: 2.5em;
-            margin-top: 20px;
-        }
-
-        p {
-            font-size: 1.2em;
-            color: #dcdcdc;
-            margin-bottom: 20px;
-        }
-
-        .content {
-            padding: 40px 50px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section {
-            margin-bottom: 50px;
-        }
-
-        .note {
-            background-color: #333;
-            color: #f0f0f0;
-            border-left: 4px solid #4caf50;
-            padding: 20px;
-            font-style: italic;
-            margin-top: 20px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
-        }
-
-        .example {
-            background-color: #222;
-            color: #e0e0e0;
-            padding: 20px;
-            margin-top: 30px;
-            border-radius: 10px;
-            border: 1px solid #444;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-        }
-
-      
         nav {
             background-color: #1c1c1c;
             padding: 10px;
@@ -293,172 +86,76 @@
         nav a:hover {
             color: #ffffff;
         }
-
-        
-        .chapter {
-            padding-top: 50px;
-        }
-    </style>
-
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <title>Capitolo 2: Componenti del Computer</title>
-    <sty
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Roboto', sans-serif;
-            background: radial-gradient(circle at top left, #1b1b1b, #000);
-            color: #f0f0f0;
-            line-height: 1.8;
-            overflow-x: hidden;
-            padding-bottom: 100px;
-        }
-
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 4em;
-            text-align: center;
-            margin: 60px 0 30px;
-            background: linear-gradient(270deg, #00ff99, #00ccff, #00ff99);
-            background-size: 600% 600%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: animatedGradient 8s ease infinite;
-            text-shadow: 0 0 10px #00ff99, 0 0 20px #00ccff;
-        }
-
-        h2 {
-            font-size: 2.5em;
-            text-align: center;
-            margin: 50px 0 20px;
-            color: #4caf50;
-            text-shadow: 0 0 8px #4caf50;
-            animation: fadeInUp 1s ease-in-out;
-        }
-
-        h3 {
-            font-size: 1.8em;
-            margin-top: 30px;
-            color: #80ffbf;
-            text-shadow: 0 0 5px #80ffbf;
-        }
-
-        p, li {
-            font-size: 1.2em;
-            color: #dcdcdc;
-            margin-bottom: 15px;
-            animation: fadeIn 1.2s ease-in-out;
-        }
-
-        ul {
-            margin-left: 20px;
-        }
-
-        .content {
-            padding: 40px 50px;
-            max-width: 1100px;
-            margin: auto;
-            animation: fadeInSlow 1.5s ease-in-out;
-        }
-
-        .section {
-            margin-bottom: 50px;
-            border-bottom: 1px solid #333;
-            padding-bottom: 30px;
-        }
-
-        .note, .example {
-            background-color: rgba(0, 255, 153, 0.1);
-            border-left: 5px solid #00ff99;
-            padding: 20px;
-            margin-top: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 255, 153, 0.3);
-        }
-
-        .index {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 0 15px rgba(0, 255, 153, 0.5);
-        }
-
-        .index h3 {
-            color: #00ff99;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-        .index a {
-            display: block;
-            color: #ffffff;
-            text-decoration: none;
-            margin-bottom: 10px;
-            padding: 8px;
-            border-radius: 6px;
-            transition: 0.3s;
-        }
-
-        .index a:hover {
-            background-color: #00ff99;
-            color: #000;
-            box-shadow: 0 0 10px #00ff99;
-        }
-
-        nav {
-            background-color: #1c1c1c;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0 4px 10px #000;
-            position: sticky;
-            top: 0;
-            z-index: 999;
-        }
-
-        nav a {
-            color: #4caf50;
-            text-decoration: none;
-            margin: 0 20px;
-            font-size: 1.2em;
-            transition: 0.3s;
-        }
-
-        nav a:hover {
-            color: #ffffff;
-            text-shadow: 0 0 8px #4caf50;
-        }
-
-        @keyframes animatedGradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInSlow {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
     </style>
 </head>
 
+<body>
+
+    <div class="content">
+        <h1>Capitolo 2: Componenti del Computer</h1>
+
+        <div class="index">
+            <h3>Indice</h3>
+            <a href="#von-neumann">1) Architettura di Von Neumann</a>
+            <a href="#hardware">2) Hardware</a>
+            <a href="#software">3) Software</a>
+        </div>
+
+        <div id="von-neumann" class="section">
+            <h2>1) Architettura di Von Neumann</h2>
+            <p>L'architettura di Von Neumann, proposta da John Von Neumann negli anni '40, è il modello di base su cui si basano la maggior parte dei computer moderni. In questo schema, i dati e le istruzioni vengono immagazzinati nella stessa memoria, il che consente di eseguire programmi che possono essere modificati.</p>
+
+            <p>La struttura dell'architettura di Von Neumann si compone di cinque componenti principali, ognuna delle quali svolge un ruolo cruciale nel funzionamento del computer:</p>
+            <ul>
+                <li><strong>Unità di controllo:</strong> Gestisce l'esecuzione delle istruzioni.</li>
+                <li><strong>Unità Aritmetica e Logica (ALU):</strong> Esegue operazioni matematiche e logiche.</li>
+                <li><strong>Memoria:</strong> Immagazzina dati e istruzioni.</li>
+                <li><strong>Dispositivi di Input/Output:</strong> Gestiscono l'interazione con l'esterno.</li>
+                <li><strong>Bus:</strong> Trasferisce dati e istruzioni tra i vari componenti.</li>
+            </ul>
+        </div>
+
+        <div id="hardware" class="section">
+            <h2>2) Hardware</h2>
+            <p>L'hardware è l'insieme di tutti i componenti fisici di un computer, e comprende dispositivi che possono essere toccati come il monitor, la tastiera, e la CPU. Ogni componente ha un ruolo specifico nel far funzionare il computer.</p>
+
+            <h3>a) Schede</h3>
+            <p>La scheda madre è il circuito principale che collega tutti i componenti. Altri tipi di schede sono:</p>
+            <ul>
+                <li><strong>Scheda video:</strong> Gestisce la visualizzazione delle immagini.</li>
+                <li><strong>Scheda audio:</strong> Gestisce la riproduzione e la registrazione del suono.</li>
+                <li><strong>Scheda di rete:</strong> Consente la connessione a una rete.</li>
+            </ul>
+
+            <h3>b) Cavi</h3>
+            <p>I cavi, come USB e HDMI, trasmettono dati tra i vari dispositivi.</p>
+
+            <h3>c) Periferiche</h3>
+            <p>Le periferiche di input come tastiere e mouse permettono di interagire con il computer. Le periferiche di output, come monitor e stampanti, restituiscono i risultati.</p>
+        </div>
+
+        <div id="software" class="section">
+            <h2>3) Software</h2>
+            <p>Il software è l'insieme di istruzioni che permettono al computer di eseguire compiti specifici. Si divide in diverse categorie:</p>
+
+            <h3>a) Firmware</h3>
+            <p>Il firmware è un software incorporato nell'hardware e necessario per il funzionamento base dei dispositivi.</p>
+
+            <h3>b) Sistemi Operativi</h3>
+            <p>I sistemi operativi, come Windows e macOS, gestiscono le risorse del computer e permettono di eseguire applicazioni.</p>
+
+            <h3>c) Applicazioni</h3>
+            <p>Le applicazioni sono programmi progettati per compiti specifici, come scrivere documenti o navigare in internet.</p>
+        </div>
+    </div>
+
+    <nav>
+        <a href="#capitolo2">Capitolo 2</a>
+        <a href="#capitolo3">Capitolo 3</a>
+        <a href="#capitolo4">Capitolo 4</a>
+        <a href="#capitolo5">Capitolo 5</a>
+    </nav>
+
+</body>
+
+</html>

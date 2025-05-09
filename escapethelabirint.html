@@ -1,0 +1,389 @@
+
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Escape the Lava Labyrinth</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .game-container {
+      text-align: center;
+    }
+
+    .maze {
+      display: grid;
+      grid-template-columns: repeat(10, 40px);
+      grid-template-rows: repeat(10, 40px);
+      gap: 2px;
+      margin: 20px auto;
+    }
+
+    .cell {
+      width: 40px;
+      height: 40px;
+      background-color: #333;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    .lava {
+      background-color: red;
+    }
+
+    .trap {
+      background-color: orange;
+    }
+
+    .spike {
+      background-color: crimson;
+    }
+
+    .player {
+      background-color: limegreen;
+    }
+
+    .exit {
+      background-color: green;
+    }
+
+    .info {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <h1>Escape the Lava Labyrinth</h1>
+    <div class="maze" id="maze"></div>
+    <div class="info" id="info">Usa le frecce per muoverti. Barra spaziatrice per SALTARE una cella!</div>
+  </div>
+
+  <script>
+    const mazeSize = 10;
+    const maze = [];
+    let player = { x: 0, y: 0 };
+    const exit = { x: 9, y: 9 };
+    let lastDirection = 'right';
+
+    const mazeContainer = document.getElementById("maze");
+
+    function createMaze() {
+      mazeContainer.innerHTML = '';
+      for (let y = 0; y < mazeSize; y++) {
+        maze[y] = [];
+        for (let x = 0; x < mazeSize; x++) {
+          const cell = document.createElement('div');
+          cell.className = 'cell';
+          maze[y][x] = cell;
+          mazeContainer.appendChild(cell);
+        }
+      }
+
+      // Aggiungi ostacoli casuali
+      for (let i = 0; i < 25; i++) {
+        const x = Math.floor(Math.random() * mazeSize);
+        const y = Math.floor(Math.random() * mazeSize);
+        if ((x === 0 && y === 0) || (x === 9 && y === 9)) continue;
+        const type = ['lava', 'trap', 'spike'][Math.floor(Math.random() * 3)];
+        maze[y][x].classList.add(type);
+      }
+
+      maze[exit.y][exit.x].classList.add('exit');
+      maze[player.y][player.x].classList.add('player');
+    }
+
+    function move(dx, dy, isJump = false) {
+      const newX = player.x + dx * (isJump ? 2 : 1);
+      const newY = player.y + dy * (isJump ? 2 : 1);
+
+      if (newX < 0 || newX >= mazeSize || newY < 0 || newY >= mazeSize) return;
+
+      maze[player.y][player.x].classList.remove('player');
+      player.x = newX;
+      player.y = newY;
+      maze[player.y][player.x].classList.add('player');
+
+      const cell = maze[player.y][player.x];
+      if (cell.classList.contains('lava') || cell.classList.contains('trap') || cell.classList.contains('spike')) {
+        document.getElementById('info').innerText = "Hai perso! 💀";
+        document.removeEventListener('keydown', keyHandler);
+        return;
+      }
+
+      if (player.x === exit.x && player.y === exit.y) {
+        document.getElementById('info').innerText = "Hai vinto! 🎉";
+        document.removeEventListener('keydown', keyHandler);
+      }
+    }
+
+    function keyHandler(e) {
+      let dx = 0, dy = 0;
+
+      if (e.key === 'ArrowUp') { dy = -1; lastDirection = 'up'; }
+      else if (e.key === 'ArrowDown') { dy = 1; lastDirection = 'down'; }
+      else if (e.key === 'ArrowLeft') { dx = -1; lastDirection = 'left'; }
+      else if (e.key === 'ArrowRight') { dx = 1; lastDirection = 'right'; }
+      else if (e.code === 'Space') {
+        if (lastDirection === 'up') move(0, -1, true);
+        else if (lastDirection === 'down') move(0, 1, true);
+        else if (lastDirection === 'left') move(-1, 0, true);
+        else if (lastDirection === 'right') move(1, 0, true);
+        return;
+      } else return;
+
+      move(dx, dy);
+    }
+
+    document.addEventListener('keydown', keyHandler);
+    createMaze();
+  </script>
+</body>
+</html>
+
+Aggiungi commento sul corso…
+
+
+Annuncio: "<!DOCTYPE html> <html lang="it"> <head>…"
+FEDERICO AQUILANTE
+Data di creazione: 10:3810:38
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Escape the Lava Labyrinth</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #111;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .game-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+
+    .maze {
+      display: grid;
+      grid-template-columns: repeat(10, 50px);
+      grid-template-rows: repeat(10, 50px);
+      gap: 5px;
+      border: 4px solid #fff;
+      border-radius: 10px;
+    }
+
+    .cell {
+      width: 50px;
+      height: 50px;
+      background-color: #333;
+      border-radius: 5px;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .lava {
+      background-color: #ff5500;
+      animation: lavaFlow 0.5s infinite alternate;
+    }
+
+    .trap {
+      background-color: #f5a623;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+    }
+
+    .spike {
+      background-color: #b30000;
+      animation: spikesAnimation 0.5s infinite alternate;
+    }
+
+    .player {
+      background-color: #00ff00;
+      animation: pulse 0.5s infinite alternate;
+    }
+
+    .exit {
+      background-color: #00b300;
+      box-shadow: 0 0 20px 5px rgba(0, 255, 0, 0.8);
+    }
+
+    .info {
+      font-size: 1.1em;
+      margin: 20px;
+      color: #ddd;
+    }
+
+    .restart-btn {
+      background-color: #ff6600;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .restart-btn:hover {
+      background-color: #e65c00;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.2); }
+    }
+
+    @keyframes lavaFlow {
+      0% { transform: scaleX(1); }
+      100% { transform: scaleX(1.2); }
+    }
+
+    @keyframes spikesAnimation {
+      0% { transform: scaleY(1); }
+      100% { transform: scaleY(1.5); }
+    }
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <h1>Escape the Lava Labyrinth</h1>
+    <div class="maze" id="maze"></div>
+    <div class="info" id="info">Muoviti con le frecce. Premi spazio per saltare!</div>
+    <button class="restart-btn" id="restart-btn" style="display:none;">Ricomincia</button>
+  </div>
+
+  <script>
+    const mazeSize = 10;
+    let playerPosition = { x: 0, y: 0 };
+    let exitPosition = { x: mazeSize - 1, y: mazeSize - 1 };
+    let gameOver = false;
+    let maze = [];
+
+    function createMaze() {
+      const mazeContainer = document.getElementById("maze");
+      mazeContainer.innerHTML = '';
+      maze = [];
+
+      for (let y = 0; y < mazeSize; y++) {
+        const row = [];
+        for (let x = 0; x < mazeSize; x++) {
+          const cell = document.createElement('div');
+          cell.classList.add('cell');
+          mazeContainer.appendChild(cell);
+          row.push(cell);
+        }
+        maze.push(row);
+      }
+
+      maze[playerPosition.y][playerPosition.x].classList.add('player');
+      maze[exitPosition.y][exitPosition.x].classList.add('exit');
+      addHazards();
+    }
+
+    function addHazards() {
+      const hazardCount = 8;
+      for (let i = 0; i < hazardCount; i++) {
+        addHazard('lava');
+        addHazard('trap');
+        addHazard('spike');
+      }
+    }
+
+    function addHazard(type) {
+      let x, y;
+      do {
+        x = Math.floor(Math.random() * mazeSize);
+        y = Math.floor(Math.random() * mazeSize);
+      } while ((x === 0 && y === 0) || (x === mazeSize - 1 && y === mazeSize - 1));
+
+      maze[y][x].classList.add(type);
+    }
+
+    function movePlayer(direction) {
+      if (gameOver) return;
+
+      let nextX = playerPosition.x;
+      let nextY = playerPosition.y;
+
+      if (direction === 'up' && nextY > 0) nextY--;
+      if (direction === 'down' && nextY < mazeSize - 1) nextY++;
+      if (direction === 'left' && nextX > 0) nextX--;
+      if (direction === 'right' && nextX < mazeSize - 1) nextX++;
+
+      const nextCell = maze[nextY][nextX];
+      if (nextCell.classList.contains('lava') ||
+          nextCell.classList.contains('trap') ||
+          nextCell.classList.contains('spike')) {
+        gameOver = true;
+        document.getElementById('info').innerText = "Sei morto! 💀 Riprova!";
+        return;
+      }
+
+      maze[playerPosition.y][playerPosition.x].classList.remove('player');
+      playerPosition = { x: nextX, y: nextY };
+      maze[playerPosition.y][playerPosition.x].classList.add('player');
+
+      if (playerPosition.x === exitPosition.x && playerPosition.y === exitPosition.y) {
+        document.getElementById('info').innerText = "Hai vinto! 🎉";
+        gameOver = true;
+        document.getElementById('restart-btn').style.display = 'block';
+      }
+    }
+
+    function jumpPlayer() {
+      if (gameOver) return;
+      const cell = maze[playerPosition.y][playerPosition.x];
+      cell.style.transform = 'translateY(-20px)';
+      setTimeout(() => {
+        cell.style.transform = 'translateY(0)';
+      }, 200);
+    }
+
+    function restartGame() {
+      playerPosition = { x: 0, y: 0 };
+      exitPosition = { x: mazeSize - 1, y: mazeSize - 1 };
+      gameOver = false;
+      document.getElementById('restart-btn').style.display = 'none';
+      createMaze();
+      document.getElementById('info').innerText = "Muoviti con le frecce. Premi spazio per saltare!";
+    }
+
+    document.getElementById('restart-btn').addEventListener('click', restartGame);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowUp') movePlayer('up');
+      if (e.key === 'ArrowDown') movePlayer('down');
+      if (e.key === 'ArrowLeft') movePlayer('left');
+      if (e.key === 'ArrowRight') movePlayer('right');
+      if (e.code === 'Space') jumpPlayer();
+    });
+
+    createMaze();
+  </script>
+</body>
+</html>
