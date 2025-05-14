@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battaglia Navale</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .grid-container {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(10, 30px);
+            grid-template-rows: repeat(10, 30px);
+            gap: 2px;
+            margin: 20px;
+            border: 2px solid #333;
+            background-color: #fff;
+        }
+
+        .cell {
+            width: 30px;
+            height: 30px;
+            background-color: #e0e0e0;
+            cursor: pointer;
+        }
+
+        .cell.ship {
+            background-color: #9e9e9e;
+        }
+
+        .cell.hit {
+            background-color: red;
+            animation: hitEffect 0.3s ease-out;
+        }
+
+        @keyframes hitEffect {
+            0% {
+                transform: scale(1);
+                background-color: red;
+            }
+            50% {
+                transform: scale(1.2);
+                background-color: #ff5733; /* Colore arancione per l'esplosione */
+            }
+            100% {
+                transform: scale(1);
+                background-color: red;
+            }
+        }
+
+        .cell.miss {
+            background-color: lightblue;
+            animation: missEffect 0.3s ease-out;
+        }
+
+        @keyframes missEffect {
+            0% {
+                transform: scale(1);
+                background-color: lightblue;
+            }
+            50% {
+                transform: scale(1.2);
+                background-color: #2196F3; /* Colore blu per l'animazione di mancato */
+            }
+            100% {
+                transform: scale(1);
+                background-color: lightblue;
+            }
+        }
+
+        .status {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .restart {
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .restart:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Battaglia Navale</h1>
+    <div class="grid-container">
+        <div>
+            <h2>La tua griglia</h2>
+            <div id="player-grid" class="grid"></div>
+        </div>
+        <div>
+            <h2>Griglia del Computer</h2>
+            <div id="computer-grid" class="grid"></div>
+        </div>
+    </div>
+
+    <div class="status" id="status">Tuo turno! Clicca sulla griglia del computer.</div>
+    <button class="restart" id="restart" onclick="startGame()" style="display:none;">Ricomincia</button>
+
+    <script>
+        const gridSize = 10;  // Dimensione della griglia (10x10)
+        const playerShips = [2, 3, 3, 4, 5]; // Lunghezze delle navi del giocatore
+        const computerShips = [2, 3, 3, 4, 5]; // Lunghezze delle navi del computer
+        let playerGrid = [];
+        let computerGrid = [];
+        let playerHits = 0;
+        let computerHits = 0;
+        let gameOver = false;
+
+        // Funzione per generare una griglia di 10x10
+        function createGrid(isPlayer) {
+            const grid = [];
+            for (let i = 0; i < gridSize; i++) {
+                const row = [];
+                for (let j = 0; j < gridSize; j++) {
+                    const cell = {
+                        isShip: false,
+                        element: null
+                    };
+                    row.push(cell);
+                }
+                grid.push(row);
+            }
+            return grid;
+        }
+
+        // Funzione per generare una nave di dimensioni variabili
+        function placeShip(grid, shipLength) {
+            let placed = false;
+            while (!placed) {
+                const row = Math.floor(Math.random() * gridSize);
+                const col = Math.floor(Math.random() * gridSize);
+                const direction = Math.random() < 0.5 ? 'horizontal' : 'vertical';
+
+                if (canPlaceShip(grid, row, col, shipLength, direction)) {
+                    for (let i = 0; i < shipLength; i++) {
+                        if (direction === 'horizontal') {
+                            grid[row][col + i].isShip = true;
+                        } else {
+                            grid[row + i][col].isShip = true;
+                        }
+                    }
+                    placed = true;
+                }
+            }
+        }
+
+        // Funzione per verificare se una nave può essere posizionata
+        function canPlaceShip(grid, row, col, shipLength, direction) {
+            if (direction === 'horizontal') {
+                if (col + shipLength > gridSize) return false;
+                for (let i = 0; i < shipLength; i++) {
+                    if (grid[row][col + i].isShip) return false;
+                }
+            } else {
+                if (row + shipLength > gridSize) return false;
+                for (let i = 0; i < shipLength; i++) {
+                    if (grid[row + i][col].isShip) return false;
+                }
+            }
+            return true;
+        }
+
+        // Funzione per creare la griglia visuale
+        function createGridUI(grid, isPlayer) {
+            const container = document.getElementById(isPlayer ? "player-grid" : "computer-grid");
+            container.innerHTML = '';
+            grid.forEach((row, i) => {
+                row.forEach((cell, j) => {
+                    const div = document.createElement('div');
+                    div.classList.add('cell');
+                    if (cell.isShip && isPlayer) {
+                        div.classList.add('ship');
+                    }
+                    div.onclick = () => handleCellClick(i, j, isPlayer);
+                    cell.element = div;
+                    container.appendChild(div);
+                });
+            });
+        }
+
+        // Funzione per gestire il click su una cella
+        function handleCellClick(row, col, isPlayer) {
+            if (gameOver || !isPlayer || computerGrid[row][col].element.classList.contains('hit') || computerGrid[row][col].element.classList.contains('miss')) {
+                return;
+            }
+
+            const cell = computerGrid[row][col];
+            if (cell.isShip) {
+                cell.element.classList.add('hit');
+                computerHits++;
+                document.getElementById('status').textContent = 'Colpito! È il turno del computer.';
+            } else {
+                cell.element.classList.add('miss');
+                document.getElementById('status').textContent = 'Mancato! È il turno del computer.';
+            }
+
+            if (computerHits === computerShips.length) {
+                document.getElementById('status').textContent = 'Hai vinto! Hai affondato tutte le navi del computer.';
+                gameOver = true;
+                document.getElementById('restart').style.display = 'block';
+            } else {
+                setTimeout(computerTurn, 1000); // Il computer gioca dopo un breve ritardo
+            }
+        }
+
+        // Funzione per il turno del computer
+        function computerTurn() {
+            if (gameOver) return;
+
+            let row, col;
+            do {
+                row = Math.floor(Math.random() * gridSize);
+                col = Math.floor(Math.random() * gridSize);
+            } while (playerGrid[row][col].element.classList.contains('hit') || playerGrid[row][col].element.classList.contains('miss'));
+
+            const cell = playerGrid[row][col];
+            if (cell.isShip) {
+                cell.element.classList.add('hit');
+                playerHits++;
+                document.getElementById('status').textContent = 'Il computer ha colpito una tua nave! È il tuo turno.';
+            } else {
+                cell.element.classList.add('miss');
+                document.getElementById('status').textContent = 'Il computer ha mancato! È il tuo turno.';
+            }
+
+            if (playerHits === playerShips.length) {
+                document.getElementById('status').textContent = 'Hai perso! Il computer ha affondato tutte le tue navi.';
+                gameOver = true;
+                document.getElementById('restart').style.display = 'block';
+            }
+        }
+
+        // Funzione per avviare il gioco
+        function startGame() {
+            playerGrid = createGrid(true);
+            computerGrid = createGrid(false);
+            playerShips.forEach(ship => placeShip(playerGrid, ship));
+            computerShips.forEach(ship => placeShip(computerGrid, ship));
+            createGridUI(playerGrid, true);
+            createGridUI(computerGrid, false);
+            gameOver = false;
+            playerHits = 0;
+            computerHits = 0;
+            document.getElementById('restart').style.display = 'none';
+            document.getElementById('status').textContent = 'Tuo turno! Clicca sulla griglia del computer.';
+        }
+
+        // Inizializza il gioco all'inizio
+        startGame();
+    </script>
+</body>
+</html>
