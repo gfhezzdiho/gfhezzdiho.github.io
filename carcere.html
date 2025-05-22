@@ -1,0 +1,23 @@
+Situazione scelta: Carcere
+Titolo del problema: Calcolo dei pasti consumati in un carcere durante la settimana
+Descrizione del problema:
+In un carcere si serve un pasto completo a ogni detenuto, tre volte al giorno (colazione, pranzo, cena). Tuttavia, alcuni detenuti possono rifiutare il pasto per vari motivi (sciopero della fame, salute, religione, etc.). Ogni giorno viene registrato quanti pasti sono stati effettivamente serviti.
+
+L’obiettivo è calcolare il totale dei pasti serviti alla fine della settimana (7 giorni), tenendo conto dei rifiuti giornalieri.
+
+Variabili di input:
+numero_detenuti → numero totale di detenuti presenti nel carcere
+
+pasti_rifiutati_giorno → numero di pasti rifiutati ogni giorno (valore che cambia giorno per giorno)
+
+Output desiderato:
+pasti_totali_serviti → totale dei pasti serviti nel corso della settimana
+
+Variabile che cambia durante l’esecuzione:
+pasti_totali_serviti → variabile accumulatore che parte da 0 e aumenta ogni giorno, in base a quanti pasti vengono effettivamente serviti
+
+Uso di condizione e ripetizione:
+Ripetizione: per ogni giorno della settimana (7 volte), si calcolano i pasti serviti (numero_detenuti × 3 - pasti_rifiutati_giorno)
+
+Condizione (opzionale): se in un giorno i pasti rifiutati superano il 50% del totale previsto, segnalare un avviso (ad esempio, possibile sciopero della fame)
+
