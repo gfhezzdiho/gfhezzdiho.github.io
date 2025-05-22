@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Labirinto nella Natura - Fuga Verde 🌿</title>
+  <style>
+    /* Stile base e reset */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom, #a1c349, #3a6b35);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      color: #f0f0f0;
+      user-select: none;
+    }
+    h1 {
+      margin-top: 20px;
+      text-shadow: 1px 1px 4px #1b3a12;
+    }
+    #maze {
+      margin-top: 15px;
+      display: grid;
+      grid-template-columns: repeat(12, 50px);
+      grid-template-rows: repeat(12, 50px);
+      gap: 3px;
+      background: url('https://i.imgur.com/Wy8e6fI.png') center center/cover no-repeat; /* sfondo natura */
+      padding: 10px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px 4px rgba(20, 80, 20, 0.7);
+      position: relative;
+      width: max-content;
+    }
+    .cell {
+      width: 50px;
+      height: 50px;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+      position: relative;
+    }
+    /* Pareti */
+    .wall {
+      background-color: #275927;
+      box-shadow: inset 2px 2px 5px #1c4419;
+    }
+    /* Passaggi */
+    .path {
+      background-color: #d1e7b7;
+      box-shadow: inset 1px 1px 2px #a5be6a;
+    }
+    /* Trappole nascoste e rivelate */
+    .trap {
+      background-color: #7f1c1c;
+      box-shadow: 0 0 8px 3px #a03434;
+      cursor: default;
+    }
+    .trap.hidden {
+      background-color: #d1e7b7;
+      box-shadow: none;
+    }
+    /* Player */
+    .player {
+      background: url('https://i.imgur.com/ZoFxX4m.png') center center no-repeat;
+      background-size: 45px 45px;
+      box-shadow: 0 0 12px 4px #ffe066;
+      z-index: 10;
+    }
+    /* Nemici */
+    .ghost {
+      background: url('https://i.imgur.com/wkCzw4A.png') center center no-repeat;
+      background-size: 40px 40px;
+      box-shadow: 0 0 10px 3px #b230b2;
+      animation: floatGhost 2s ease-in-out infinite;
+      z-index: 9;
+    }
+    @keyframes floatGhost {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    /* Chiavi */
+    .key {
+      background: url('https://i.imgur.com/GxjO1NL.png') center center no-repeat;
+      background-size: 35px 35px;
+      box-shadow: 0 0 10px 3px #ffd700;
+      cursor: pointer;
+      z-index: 8;
+    }
+    /* Uscita */
+    .exit {
+      background-color: #2a6b28;
+      border: 3px solid #a0d468;
+      box-shadow: 0 0 12px 4px #9fe86f;
+      border-radius: 12px;
+      cursor: pointer;
+      z-index: 7;
+    }
+    /* Info e legenda */
+    #info {
+      margin-top: 15px;
+      font-size: 1.1rem;
+      min-height: 30px;
+      text-shadow: 1px 1px 3px #145214;
+    }
+    #legend {
+      margin-top: 20px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      max-width: 600px;
+      justify-content: center;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.95rem;
+      text-shadow: 1px 1px 3px #113311;
+    }
+    .legend-color {
+      width: 22px;
+      height: 22px;
+      border-radius: 5px;
+      border: 1px solid #333;
+    }
+    .legend-wall { background-color: #275927; box-shadow: inset 2px 2px 5px #1c4419;}
+    .legend-path { background-color: #d1e7b7; box-shadow: inset 1px 1px 2px #a5be6a;}
+    .legend-trap { background-color: #7f1c1c; box-shadow: 0 0 8px 3px #a03434;}
+    .legend-player {
+      background: url('https://i.imgur.com/ZoFxX4m.png') center center no-repeat;
+      background-size: 22px 22px;
+      box-shadow: 0 0 6px 3px #ffe066;
+    }
+    .legend-ghost {
+      background: url('https://i.imgur.com/wkCzw4A.png') center center no-repeat;
+      background-size: 22px 22px;
+      box-shadow: 0 0 6px 3px #b230b2;
+    }
+    .legend-key {
+      background: url('https://i.imgur.com/GxjO1NL.png') center center no-repeat;
+      background-size: 22px 22px;
+      box-shadow: 0 0 6px 3px #ffd700;
+    }
+    .legend-exit { background-color: #2a6b28; border: 1.5px solid #a0d468; border-radius: 4px; }
+
+  </style>
+</head>
+<body>
+
+  <h1>Labirinto nella Natura - Fuga Verde 🌿</h1>
+
+  <div id="maze"></div>
+
+  <div id="info">Usa le frecce per muoverti, raccogli <b>3 chiavi</b> e raggiungi l'uscita!</div>
+
+  <div id="legend">
+    <div class="legend-item"><div class="legend-color legend-wall"></div> Muro</div>
+    <div class="legend-item"><div class="legend-color legend-path"></div> Passaggio</div>
+    <div class="legend-item"><div class="legend-color legend-trap"></div> Trappola</div>
+    <div class="legend-item"><div class="legend-color legend-player"></div> Tu</div>
+    <div class="legend-item"><div class="legend-color legend-ghost"></div> Nemico (Fantasma)</div>
+    <div class="legend-item"><div class="legend-color legend-key"></div> Chiave</div>
+    <div class="legend-item"><div class="legend-color legend-exit"></div> Uscita</div>
+  </div>
+
+<script>
+  const mazeWidth = 12;
+  const mazeHeight = 12;
+
+  // Griglia di base: 0 = muro, 1 = passaggio
+  // Qui c'è un labirinto base, puoi cambiarlo o farlo generare automaticamente
+  const mazeMap = [
+    [0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,1,1,1,0,1,1,1,1,1,1,0],
+    [0,1,0,1,0,1,0,0,0,0,1,0],
+    [0,1,0,1,1,1,0,1,1,0,1,0],
+    [0,1,0,0,0,1,0,1,0,0,1,0],
+    [0,1,1,1,0,1,0,1,1,1,1,0],
+    [0,0,0,1,0,1,0,0,0,0,0,0],
+    [0,1,1,1,1,1,1,1,1,1,1,0],
+    [0,1,0,0,0,0,0,0,0,0,1,0],
+    [0,1,1,1,1,1,1,1,1,0,1,0],
+    [0,0,0,0,0,0,0,0,1,1,1,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0],
+  ];
+
+  let playerPos = { x: 1, y: 1 };
+  let exitPos = { x: 10, y: 10 };
+  let keysPos = [
+    { x: 3, y: 1 },
+    { x: 9, y: 7 },
+    { x: 6, y: 5 }
+  ];
+
+  let trapsPos = [
+    { x: 4, y: 5 },
+    { x: 7, y: 3 },
+    { x: 8, y: 9 },
+    { x: 2, y: 7 }
+  ];
+
+  let ghosts = [
+    { x: 10, y: 1 },
+    { x: 5, y: 8 }
+  ];
+
+  let collectedKeys = 0;
+  let gameOver = false;
+  let ghostsSpeed = 1800; // ms intervallo movimento
+  let ghostsMultiplierActive = false;
+
+  const mazeElem = document.getElementById('maze');
+  const infoElem = document.getElementById('info');
+
+  function createMaze() {
+    mazeElem.innerHTML = '';
+    for(let y=0; y<mazeHeight; y++) {
+      for(let x=0; x<mazeWidth; x++) {
+        const cell = document.createElement('div');
+        cell.classList.add('cell');
+        if(mazeMap[y][x] === 0) {
+          cell.classList.add('wall');
+        } else {
+          cell.classList.add('path');
+        }
+        cell.id = `cell-${x}-${y}`;
+        mazeElem.appendChild(cell);
+      }
+    }
+  }
+
+  function placeObjects() {
+    keysPos.forEach(k => {
+      const keyCell = document.getElementById(`cell-${k.x}-${k.y}`);
+      if (keyCell) keyCell.classList.add('key');
+    });
+
+    trapsPos.forEach(t => {
+      const trapCell = document.getElementById(`cell-${t.x}-${t.y}`);
+      if (trapCell) trapCell.classList.add('trap', 'hidden');
+    });
+
+    const exitCell = document.getElementById(`cell-${exitPos.x}-${exitPos.y}`);
+    if (exitCell) exitCell.classList.add('exit');
+  }
+
+  function placePlayer() {
+    // Rimuove eventuale player esistente
+    document.querySelectorAll('.player').forEach(el => el.classList.remove('player'));
+    const playerCell = document.getElementById(`cell-${playerPos.x}-${playerPos.y}`);
+    if (playerCell) playerCell.classList.add('player');
+  }
+
+  function placeGhosts() {
+    document.querySelectorAll('.ghost').forEach(el => el.classList.remove('ghost'));
+    ghosts.forEach(g => {
+      const ghostCell = document.getElementById(`cell-${g.x}-${g.y}`);
+      if (ghostCell) ghostCell.classList.add('ghost');
+    });
+  }
+
+  function revealTrapsNearby() {
+    for(let y = playerPos.y -1; y <= playerPos.y +1; y++) {
+      for(let x = playerPos.x -1; x <= playerPos.x +1; x++) {
+        if(x >= 0 && x < mazeWidth && y >= 0 && y < mazeHeight) {
+          const cell = document.getElementById(`cell-${x}-${y}`);
+          if(cell && cell.classList.contains('hidden')) {
+            cell.classList.remove('hidden');
+          }
+        }
+      }
+    }
+  }
+
+  function isWalkable(x,y) {
+    if(x < 0 || x >= mazeWidth || y < 0 || y >= mazeHeight) return false;
+    if(mazeMap[y][x] === 0) return false; // muro
+    return true;
+  }
+
+  function movePlayer(dx, dy) {
+    if(gameOver) return;
+
+    const newX = playerPos.x + dx;
+    const newY = playerPos.y + dy;
+
+    if(!isWalkable(newX, newY)) return;
+
+    playerPos.x = newX;
+    playerPos.y = newY;
+    placePlayer();
+
+    revealTrapsNearby();
+
+    const currentCell = document.getElementById(`cell-${newX}-${newY}`);
+
+    // Controlla trappola
+    if(currentCell.classList.contains('trap')) {
+      gameOver = true;
+      infoElem.innerHTML = '<b>Sei caduto in una trappola! 💀</b> Ricarica la pagina per riprovare.';
+      return;
+    }
+
+    // Controlla chiavi
+    if(currentCell.classList.contains('key')) {
+      collectedKeys++;
+      currentCell.classList.remove('key');
+      infoElem.innerHTML = `Hai raccolto una chiave! 🔑 (${collectedKeys}/3)`;
+      if(collectedKeys === 3) {
+        infoElem.innerHTML += ' Ora l’uscita è sbloccata! Vai veloce!';
+        ghostsMultiplierActive = true;
+        increaseGhostsDifficulty();
+      }
+    }
+
+    // Controlla uscita
+    if(newX === exitPos.x && newY === exitPos.y) {
+      if(collectedKeys >= 3) {
+        gameOver = true;
+        infoElem.innerHTML = '<b>Complimenti! Hai vinto il labirinto! 🎉🌳</b>';
+      } else {
+        infoElem.innerHTML = 'Serve raccogliere tutte le chiavi prima di uscire!';
+      }
+    }
+
+    // Controlla nemici
+    for(let g of ghosts) {
+      if(g.x === playerPos.x && g.y === playerPos.y) {
+        gameOver = true;
+        infoElem.innerHTML = '<b>Un fantasma ti ha preso! 👻</b> Ricarica per riprovare.';
+        return;
+      }
+    }
+  }
+
+  // Movimento semplice dei fantasmi (intelligente verso player con deviazioni casuali)
+  function moveGhosts() {
+    if(gameOver) return;
+
+    ghosts.forEach((g, idx) => {
+      // Rimuove la classe ghost dalla cella attuale
+      const oldCell = document.getElementById(`cell-${g.x}-${g.y}`);
+      if(oldCell) oldCell.classList.remove('ghost');
+
+      // Calcola possibile movimento verso player
+      const dx = playerPos.x - g.x;
+      const dy = playerPos.y - g.y;
+      let stepX = 0, stepY = 0;
+
+      if(Math.abs(dx) > Math.abs(dy)) {
+        stepX = dx > 0 ? 1 : -1;
+      } else {
+        stepY = dy > 0 ? 1 : -1;
+      }
+
+      // Piccola casualità per deviare (20% probabilità)
+      if(Math.random() < 0.2) {
+        if(Math.random() < 0.5) {
+          stepX = (Math.random() < 0.5) ? 1 : -1;
+          stepY = 0;
+        } else {
+          stepY = (Math.random() < 0.5) ? 1 : -1;
+          stepX = 0;
+        }
+      }
+
+      const newX = g.x + stepX;
+      const newY = g.y + stepY;
+
+      if(isWalkable(newX, newY)) {
+        g.x = newX;
+        g.y = newY;
+      } else {
+        // Prova un movimento casuale se bloccato
+        const moves = [
+          {x: g.x+1, y: g.y}, {x: g.x-1, y: g.y},
+          {x: g.x, y: g.y+1}, {x: g.x, y: g.y-1}
+        ];
+        const validMoves = moves.filter(m => isWalkable(m.x,m.y));
+        if(validMoves.length > 0) {
+          const choice = validMoves[Math.floor(Math.random()*validMoves.length)];
+          g.x = choice.x;
+          g.y = choice.y;
+        }
+      }
+      // Aggiorna la nuova cella
+      const newCell = document.getElementById(`cell-${g.x}-${g.y}`);
+      if(newCell) newCell.classList.add('ghost');
+
+      // Controlla se il fantasma ha preso il player
+      if(g.x === playerPos.x && g.y === playerPos.y) {
+        gameOver = true;
+        infoElem.innerHTML = '<b>Un fantasma ti ha preso! 👻</b> Ricarica per riprovare.';
+      }
+    });
+  }
+
+  // Aumenta velocità e moltiplica fantasmi dopo aver preso tutte le chiavi
+  function increaseGhostsDifficulty() {
+    ghostsSpeed = 900; // velocità raddoppiata
+    // Aggiunge 2 fantasmi extra
+    ghosts.push({ x: 1, y: 10 });
+    ghosts.push({ x: 10, y: 3 });
+  }
+
+  function gameLoop() {
+    if(gameOver) return;
+    moveGhosts();
+  }
+
+  createMaze();
+  placeObjects();
+  placePlayer();
+  placeGhosts();
+  revealTrapsNearby();
+
+  document.addEventListener('keydown', e => {
+    if(gameOver) return;
+    switch(e.key) {
+      case 'ArrowUp': movePlayer(0, -1); break;
+      case 'ArrowDown': movePlayer(0, 1); break;
+      case 'ArrowLeft': movePlayer(-1, 0); break;
+      case 'ArrowRight': movePlayer(1, 0); break;
+    }
+  });
+
+  setInterval(gameLoop, ghostsSpeed);
+
+</script>
+
+</body>
+</html>

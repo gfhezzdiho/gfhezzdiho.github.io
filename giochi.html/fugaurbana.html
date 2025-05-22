@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dino Runner</title>
+<style>
+  body {
+    margin: 0;
+    background: linear-gradient(135deg, #7ec850, #3b6e22);
+    overflow: hidden;
+    font-family: 'Verdana', sans-serif;
+    user-select: none;
+    color: #fff;
+    text-align: center;
+  }
+  #gameCanvas {
+    background: linear-gradient(to bottom, #cce9a9, #6c993f);
+    display: block;
+    margin: 30px auto;
+    border: 5px solid #2e4a0b;
+    border-radius: 12px;
+    box-shadow: 0 0 20px #194500 inset;
+  }
+  #info {
+    font-size: 22px;
+    margin-top: 12px;
+    font-weight: bold;
+    color: #f0f9de;
+    text-shadow: 0 0 5px #194500;
+  }
+</style>
+</head>
+<body>
+
+<canvas id="gameCanvas" width="700" height="300"></canvas>
+<div id="info">Punteggio: 0 | SPAZIO: salta, FRECCIA GIÙ: abbassati</div>
+
+<script>
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+const WIDTH = canvas.width;
+const HEIGHT = canvas.height;
+
+// Dinosauro
+const dino = {
+  x: 70,
+  y: HEIGHT - 70,
+  width: 50,
+  height: 60,
+  yVelocity: 0,
+  gravity: 0.7,
+  jumpPower: -14,
+  isOnGround: true,
+  isDucking: false,
+  duckHeight: 35,
+  colorBody: '#3a7d00',
+  colorSpots: '#1f4d00'
+};
+
+// Ostacoli a terra (piante spinose)
+const groundObstacles = [];
+// Ostacoli volanti (insetti)
+const flyingObstacles = [];
+
+let obstacleTimer = 0;
+let obstacleInterval = 1500;
+
+let score = 0;
+let gameOver = false;
+
+let keys = {};
+window.addEventListener('keydown', e => {
+  keys[e.code] = true;
+});
+window.addEventListener('keyup', e => {
+  keys[e.code] = false;
+});
+
+function spawnObstacle() {
+  // Alterna ostacoli a terra e volanti
+  const type = Math.random() < 0.6 ? 'ground' : 'flying';
+
+  if (type === 'ground') {
+    const height = 40 + Math.random() * 30;
+    groundObstacles.push({
+      x: WIDTH,
+      y: HEIGHT - height - 20,
+      width: 25 + Math.random() * 20,
+      height: height,
+      speed: 6 + score / 1000,
+      color: '#1b3a00'
+    });
+  } else {
+    // Volanti più piccoli, altezza variabile sopra il terreno
+    flyingObstacles.push({
+      x: WIDTH,
+      y: HEIGHT - 120 - Math.random() * 80,
+      width: 30,
+      height: 20,
+      speed: 7 + score / 1000,
+      color: '#8bc34a'
+    });
+  }
+}
+
+function update(deltaTime) {
+  if (gameOver) return;
+
+  // Abbassarsi
+  if (keys['ArrowDown']) {
+    dino.isDucking = true;
+  } else {
+    dino.isDucking = false;
+  }
+
+  // Salto solo se non è abbassato e a terra
+  if ((keys['Space'] || keys['ArrowUp']) && dino.isOnGround && !dino.isDucking) {
+    dino.yVelocity = dino.jumpPower;
+    dino.isOnGround = false;
+  }
+
+  dino.yVelocity += dino.gravity;
+  dino.y += dino.yVelocity;
+
+  // Gestione altezza a seconda se è abbassato
+  if (dino.isDucking) {
+    dino.height = dino.duckHeight;
+  } else {
+    dino.height = 60;
+  }
+
+  if (dino.y + dino.height >= HEIGHT - 20) {
+    dino.y = HEIGHT - 20 - dino.height;
+    dino.yVelocity = 0;
+    dino.isOnGround = true;
+  }
+
+  obstacleTimer += deltaTime;
+  if (obstacleTimer > obstacleInterval) {
+    spawnObstacle();
+    obstacleTimer = 0;
+    if (obstacleInterval > 600) obstacleInterval -= 15;
+  }
+
+  // Muovi e controlla collisioni ostacoli a terra
+  for (let i = groundObstacles.length - 1; i >= 0; i--) {
+    const obs = groundObstacles[i];
+    obs.x -= obs.speed;
+
+    if (
+      dino.x < obs.x + obs.width &&
+      dino.x + dino.width > obs.x &&
+      dino.y < obs.y + obs.height &&
+      dino.y + dino.height > obs.y
+    ) {
+      gameOver = true;
+      setTimeout(() => alert(`Game Over!\nPunteggio: ${score}`), 100);
+      break;
+    }
+
+    if (obs.x + obs.width < 0) {
+      groundObstacles.splice(i, 1);
+      score++;
+    }
+  }
+
+  // Muovi e controlla collisioni ostacoli volanti
+  for (let i = flyingObstacles.length - 1; i >= 0; i--) {
+    const obs = flyingObstacles[i];
+    obs.x -= obs.speed;
+
+    if (
+      dino.x < obs.x + obs.width &&
+      dino.x + dino.width > obs.x &&
+      dino.y < obs.y + obs.height &&
+      dino.y + dino.height > obs.y
+    ) {
+      gameOver = true;
+      setTimeout(() => alert(`Game Over!\nPunteggio: ${score}`), 100);
+      break;
+    }
+
+    if (obs.x + obs.width < 0) {
+      flyingObstacles.splice(i, 1);
+      score++;
+    }
+  }
+}
+
+function drawDino() {
+  ctx.save();
+
+  // Corpo dinosauro (rettangolo con piccole "macchie")
+  ctx.fillStyle = dino.colorBody;
+  ctx.fillRect(dino.x, dino.y, dino.width, dino.height);
+
+  // Macchie rotondeggianti per effetto pelle
+  ctx.fillStyle = dino.colorSpots;
+  for(let i = 0; i < 5; i++) {
+    const cx = dino.x + 10 + i*8;
+    const cy = dino.y + dino.height/2 + (i % 2) * 8;
+    const radius = 4;
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, radius, radius * 0.7, 0, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Testa (ellisse)
+  ctx.fillStyle = dino.colorBody;
+  ctx.beginPath();
+  ctx.ellipse(dino.x + dino.width - 10, dino.y + (dino.isDucking ? dino.height - 15 : 25), 15, 20, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Occhio
+  ctx.fillStyle = '#fff';
+  ctx.beginPath();
+  ctx.ellipse(dino.x + dino.width - 5, dino.y + (dino.isDucking ? dino.height - 18 : 22), 6, 6, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = '#000';
+  ctx.beginPath();
+  ctx.ellipse(dino.x + dino.width - 3, dino.y + (dino.isDucking ? dino.height - 18 : 22), 3, 3, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.restore();
+}
+
+function drawObstacle(obs, isFlying) {
+  ctx.save();
+
+  if (isFlying) {
+    // Ostacolo volante: insetto stilizzato (ali e corpo)
+    ctx.fillStyle = obs.color;
+    ctx.beginPath();
+    ctx.ellipse(obs.x + obs.width / 2, obs.y + obs.height / 2, obs.width / 2, obs.height / 2, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Ali
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+    ctx.beginPath();
+    ctx.ellipse(obs.x + obs.width / 2 - 12, obs.y + obs.height / 2 - 5, 10, 6, 0.5, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.ellipse(obs.x + obs.width / 2 + 12, obs.y + obs.height / 2 - 5, 10, 6, -0.5, 0, Math.PI * 2);
+    ctx.fill();
+
+  } else {
+    // Ostacolo a terra: pianta spinosa stilizzata
+    ctx.fillStyle = obs.color;
+    ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+
+    // Spine
+    ctx.strokeStyle = '#2e5e00';
+    ctx.lineWidth = 2;
+    for(let i = 0; i < obs.height; i += 6){
+      ctx.beginPath();
+      ctx.moveTo(obs.x, obs.y + i);
+      ctx.lineTo(obs.x + obs.width / 3, obs.y + i + 4);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(obs.x + obs.width / 3, obs.y + i + 4);
+      ctx.lineTo(obs.x, obs.y + i + 8);
+      ctx.stroke();
+    }
+  }
+
+  ctx.restore();
+}
+
+function draw() {
+  // Sfondo
+  const bgGrad = ctx.createLinearGradient(0, 0, 0, HEIGHT);
+  bgGrad.addColorStop(0, '#7ec850');
+  bgGrad.addColorStop(1, '#3b6e22');
+  ctx.fillStyle = bgGrad;
+  ctx.fillRect(0, 0, WIDTH, HEIGHT);
+
+  // Terreno
+  const groundGrad = ctx.createLinearGradient(0, HEIGHT - 20, 0, HEIGHT);
+  groundGrad.addColorStop(0, '#2d5200');
+  groundGrad.addColorStop(1, '#559900');
+  ctx.fillStyle = groundGrad;
+  ctx.fillRect(0, HEIGHT - 20, WIDTH, 20);
+
+  // Dinosauro
+  drawDino();
+
+  // Ostacoli a terra
+  groundObstacles.forEach(obs => drawObstacle(obs, false));
+
+  // Ostacoli volanti
+  flyingObstacles.forEach(obs => drawObstacle(obs, true));
+}
+
+let lastTime = 0;
+function gameLoop(timestamp = 0) {
+  const deltaTime = timestamp - lastTime;
+  lastTime = timestamp;
+
+  update(deltaTime);
+  draw();
+
+  document.getElementById('info').textContent = `Punteggio: ${score} | SPAZIO: salta, FRECCIA GIÙ: abbassati`;
+
+  if (!gameOver) requestAnimationFrame(gameLoop);
+}
+
+gameLoop();
+</script>
+
+</body>
+</html>

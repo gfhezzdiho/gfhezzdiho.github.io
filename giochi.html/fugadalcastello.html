@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fuga dal Castello Maledetto</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .game-container {
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .maze {
+      display: grid;
+      grid-template-columns: repeat(10, 40px);
+      grid-template-rows: repeat(10, 40px);
+      gap: 3px;
+      background-color: #222;
+      border: 4px solid #fff;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    .cell {
+      width: 40px;
+      height: 40px;
+      background-color: #444;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    .player {
+      background-color: yellow;
+      box-shadow: 0 0 15px 5px rgba(255, 255, 0, 0.8);
+    }
+
+    .ghost {
+      background-color: rgba(255, 255, 255, 0.8);
+      animation: float 1s infinite alternate;
+    }
+
+    .trap {
+      background-color: darkred;
+    }
+
+    .hidden-trap {
+      background-color: #444;
+    }
+
+    .revealed {
+      background-color: darkred;
+    }
+
+    .key {
+      background-color: gold;
+    }
+
+    .exit {
+      background-color: green;
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(0);
+      }
+      to {
+        transform: translateY(-5px);
+      }
+    }
+
+    .info {
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <h1>Fuga dal Castello Maledetto</h1>
+    <div class="maze" id="maze"></div>
+    <div class="info" id="info">Muoviti con le frecce. Raccogli tutte le chiavi 🗝️ e raggiungi l’uscita! Attento ai fantasmi! 👻</div>
+  </div>
+
+  <script>
+    const mazeSize = 10;
+    let player = { x: 0, y: 0 };
+    let keysCollected = 0;
+    const keysNeeded = 3;
+    let ghosts = [];
+    const maze = [];
+    const mazeContainer = document.getElementById('maze');
+
+    const exit = { x: 9, y: 9 };
+    // Tre chiavi sparse nel labirinto
+    const keysPositions = [
+      { x: 4, y: 4 },
+      { x: 1, y: 7 },
+      { x: 7, y: 2 },
+    ];
+
+    // Variabile per la velocità dei fantasmi (in ms)
+    let ghostSpeed = 1500;
+    let ghostMoveInterval;
+
+    function createMaze() {
+      mazeContainer.innerHTML = '';
+      for (let y = 0; y < mazeSize; y++) {
+        maze[y] = [];
+        for (let x = 0; x < mazeSize; x++) {
+          const cell = document.createElement('div');
+          cell.classList.add('cell');
+          maze[y][x] = cell;
+          mazeContainer.appendChild(cell);
+        }
+      }
+
+      maze[player.y][player.x].classList.add('player');
+      maze[exit.y][exit.x].classList.add('exit');
+
+      keysPositions.forEach(pos => {
+        maze[pos.y][pos.x].classList.add('key');
+      });
+
+      // Aggiungi trappole nascoste iniziali
+      for (let i = 0; i < 15; i++) {
+        const tx = Math.floor(Math.random() * mazeSize);
+        const ty = Math.floor(Math.random() * mazeSize);
+        if (
+          (tx === player.x && ty === player.y) ||
+          (tx === exit.x && ty === exit.y) ||
+          keysPositions.some(k => k.x === tx && k.y === ty)
+        ) continue;
+        maze[ty][tx].classList.add('hidden-trap');
+      }
+
+      // Aggiungi fantasmi iniziali (3)
+      ghosts = [];
+      for (let i = 0; i < 3; i++) {
+        let gx, gy;
+        do {
+          gx = Math.floor(Math.random() * mazeSize);
+          gy = Math.floor(Math.random() * mazeSize);
+        } while (
+          maze[gy][gx].classList.contains('player') ||
+          maze[gy][gx].classList.contains('key') ||
+          maze[gy][gx].classList.contains('hidden-trap') ||
+          maze[gy][gx].classList.contains('exit')
+        );
+        ghosts.push({ x: gx, y: gy });
+        maze[gy][gx].classList.add('ghost');
+      }
+    }
+
+    function movePlayer(dx, dy) {
+      const newX = player.x + dx;
+      const newY = player.y + dy;
+      if (newX < 0 || newX >= mazeSize || newY < 0 || newY >= mazeSize) return;
+
+      maze[player.y][player.x].classList.remove('player');
+      player.x = newX;
+      player.y = newY;
+
+      // Rivela trappole vicine
+      for (let y = -1; y <= 1; y++) {
+        for (let x = -1; x <= 1; x++) {
+          const rx = player.x + x;
+          const ry = player.y + y;
+          if (rx >= 0 && rx < mazeSize && ry >= 0 && ry < mazeSize) {
+            if (maze[ry][rx].classList.contains('hidden-trap')) {
+              maze[ry][rx].classList.add('revealed');
+            }
+          }
+        }
+      }
+
+      maze[player.y][player.x].classList.add('player');
+
+      const cell = maze[player.y][player.x];
+      if (cell.classList.contains('revealed')) {
+        document.getElementById('info').innerText = "Hai calpestato una trappola! 💀";
+        stopGame();
+        return;
+      }
+
+      if (cell.classList.contains('key')) {
+        keysCollected++;
+        cell.classList.remove('key');
+        document.getElementById('info').innerText = `Hai raccolto una chiave! Chiavi raccolte: ${keysCollected} / ${keysNeeded}.`;
+
+        // Aggiungi nuove trappole nascoste dopo aver preso la chiave
+        let newTraps = 0;
+        while (newTraps < 10) {
+          const tx = Math.floor(Math.random() * mazeSize);
+          const ty = Math.floor(Math.random() * mazeSize);
+          if (
+            (tx === player.x && ty === player.y) ||
+            (tx === exit.x && ty === exit.y) ||
+            keysPositions.some(k => maze[ty][tx].classList.contains('key')) ||
+            maze[ty][tx].classList.contains('hidden-trap') ||
+            maze[ty][tx].classList.contains('revealed') ||
+            maze[ty][tx].classList.contains('key') ||
+            maze[ty][tx].classList.contains('ghost')
+          ) continue;
+          maze[ty][tx].classList.add('hidden-trap');
+          newTraps++;
+        }
+
+        // Cambia la difficoltà in base alle chiavi raccolte
+        updateGhostsDifficulty();
+      }
+
+      if (player.x === exit.x && player.y === exit.y) {
+        if (keysCollected === keysNeeded) {
+          document.getElementById('info').innerText = "Hai vinto! 🎉";
+          stopGame();
+        } else {
+          document.getElementById('info').innerText = `Serve raccogliere tutte le chiavi (${keysCollected} / ${keysNeeded}) per uscire! 🗝️`;
+        }
+      }
+
+      // Controllo fantasmi
+      ghosts.forEach(g => {
+        if (g.x === player.x && g.y === player.y) {
+          document.getElementById('info').innerText = "Un fantasma ti ha preso! 👻";
+          stopGame();
+        }
+      });
+    }
+
+    function moveGhosts() {
+      ghosts.forEach(g => {
+        maze[g.y][g.x].classList.remove('ghost');
+        const directions = [];
+        if (g.y > 0) directions.push({ dx: 0, dy: -1 });
+        if (g.y < mazeSize - 1) directions.push({ dx: 0, dy: 1 });
+        if (g.x > 0) directions.push({ dx: -1, dy: 0 });
+        if (g.x < mazeSize - 1) directions.push({ dx: 1, dy: 0 });
+
+        // Movimento fantasmi più intelligente verso il giocatore
+        // Trova direzione che avvicina di più a player
+        directions.sort((a, b) => {
+          const distA = Math.abs(g.x + a.dx - player.x) + Math.abs(g.y + a.dy - player.y);
+          const distB = Math.abs(g.x + b.dx - player.x) + Math.abs(g.y + b.dy - player.y);
+          return distA - distB;
+        });
+
+        const move = directions[0];
+        g.x += move.dx;
+        g.y += move.dy;
+        maze[g.y][g.x].classList.add('ghost');
+      });
+
+      // Controllo collisione fantasmi - giocatore
+      ghosts.forEach(g => {
+        if (g.x === player.x && g.y === player.y) {
+          document.getElementById('info').innerText = "Un fantasma ti ha preso! 👻";
+          stopGame();
+        }
+      });
+    }
+
+    function updateGhostsDifficulty() {
+      if (ghostMoveInterval) clearInterval(ghostMoveInterval);
+
+      if (keysCollected === 0) {
+        ghostSpeed = 1500;
+      } else if (keysCollected === 1) {
+        ghostSpeed = 800; // più veloci
+      } else if (keysCollected === 2) {
+        ghostSpeed = 600; // ancora più veloci
+        // Raddoppia i fantasmi
+        const currentGhostsCount = ghosts.length;
+        for (let i = 0; i < currentGhostsCount; i++) {
+          let gx, gy, tries = 0;
+          do {
+            gx = Math.floor(Math.random() * mazeSize);
+            gy = Math.floor(Math.random() * mazeSize);
+            tries++;
+          } while (
+            (maze[gy][gx].classList.contains('player') ||
+            maze[gy][gx].classList.contains('key') ||
+            maze[gy][gx].classList.contains('hidden-trap') ||
+            maze[gy][gx].classList.contains('exit') ||
+            maze[gy][gx].classList.contains('ghost')) && tries < 50
+          );
+          if (tries < 50) {
+            ghosts.push({ x: gx, y: gy });
+            maze[gy][gx].classList.add('ghost');
+          }
+        }
+      } else if (keysCollected === 3) {
+        ghostSpeed = 600; // velocità alta, ma non si moltiplicano di più
+      }
+
+      ghostMoveInterval = setInterval(moveGhosts, ghostSpeed);
+    }
+
+    function handleKey(e) {
+      if (e.key === 'ArrowUp') movePlayer(0, -1);
+      if (e.key === 'ArrowDown') movePlayer(0, 1);
+      if (e.key === 'ArrowLeft') movePlayer(-1, 0);
+      if (e.key === 'ArrowRight') movePlayer(1, 0);
+    }
+
+    function stopGame() {
+      document.removeEventListener('keydown', handleKey);
+      if (ghostMoveInterval) clearInterval(ghostMoveInterval);
+    }
+
+    createMaze();
+    updateGhostsDifficulty();
+    document.addEventListener('keydown', handleKey);
+  </script>
+</body>
+</html>
